@@ -110,15 +110,15 @@ Objetivo:
 El objetivo principal es alcanzar la mayor puntuación posible al crear la burbuja más grande.
 Se pueden incluir niveles con objetivos específicos, como crear una burbuja de un tamaño determinado o alcanzar una cierta puntuación en un tiempo limitado.
 
-##Desarrollo:
+## Desarrollo:
 Herramientas: Utiliza motores como Unity o Godot, que permiten un desarrollo rápido y eficiente de juegos 2D.
 Plataformas: El juego podría lanzarse en dispositivos móviles (iOS, Android) o en navegadores web.
 Animaciones: Las animaciones suaves y fluidas son clave para dar vida al entorno submarino. Puedes usar programas como Spine o DragonBones para animar las burbujas y los fondos.
 Optimización: Dado que es un juego casual, es importante mantener un rendimiento fluido, especialmente en dispositivos móviles. Mantén los gráficos ligeros y optimiza las animaciones para que el juego funcione sin problemas.
 
-##Dificultad:
+## Dificultad:
 Aumento Gradual: El juego comienza con un ritmo lento y sencillo, pero la dificultad aumenta con la velocidad de las burbujas, la cantidad de colores y la introducción de obstáculos.
 Modos de Juego: Considera incluir diferentes modos, como un modo infinito (endless) donde el objetivo es sobrevivir el mayor tiempo posible, y un modo desafío con niveles predefinidos.
 
-##Narrativa:
+## Narrativa:
 Historia: Aunque es un juego casual, podrías incluir una narrativa ligera, como seguir a una pequeña burbuja marina que busca crecer y explorar el vasto océano. Los fondos podrían cambiar a medida que la burbuja avanza, representando diferentes ecosistemas marinos.
