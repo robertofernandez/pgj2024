@@ -3,8 +3,9 @@ using UnityEngine;
 public class BackgroundTilesManager : MonoBehaviour {
     public GameObject backgroundTile;
     public BackgroundTileContainer[,] tilesSet;
-    float currentCenterX = 0;
-    float currentCenterY = 0;
+    public BackgroundTileContainer[] allTiles;
+    public float currentCenterX = 0;
+    public float currentCenterY = 0;
     public GameObject charactersManagerGameObject;
     public CharactersManager charactersManager;
 
@@ -15,6 +16,7 @@ public class BackgroundTilesManager : MonoBehaviour {
         charactersManager = charactersManagerGameObject.GetComponent<CharactersManager>();
 
         tilesSet = new BackgroundTileContainer[3, 3];
+        allTiles = new BackgroundTileContainer[9];
 
         int cid = 1;
         for (int i = 0; i < 3; i++)
@@ -23,6 +25,7 @@ public class BackgroundTilesManager : MonoBehaviour {
             {
                 GameObject tile = instantiateBackgroundTile(0f,0f);
                 BackgroundTileContainer current = new BackgroundTileContainer(tile, cid++);
+                allTiles[cid-2] = current;
                 tilesSet[i, j] = current;
             }
         }
@@ -52,6 +55,7 @@ public class BackgroundTilesManager : MonoBehaviour {
                 BackgroundTileContainer current = tilesSet[i, j];
                 if(MathUtils.contains(current, characterX, characterY))
                 {
+                    //Debug.Log("Center changet to" + current.id);
                     center = current;
                     currentCenterX = center.centerX();
                     currentCenterY = center.centerY();
@@ -66,6 +70,10 @@ public class BackgroundTilesManager : MonoBehaviour {
             BackgroundTileContainer temp = tilesSet[1, 1];
             tilesSet[1, 1] = center;
             tilesSet[swapI, swapJ] = temp;
+        }
+        else
+        {
+            Debug.Log("No center!");
         }
     }
 

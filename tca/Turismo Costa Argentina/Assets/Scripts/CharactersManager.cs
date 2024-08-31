@@ -10,7 +10,7 @@ public class CharactersManager : MonoBehaviour {
     public GameObject basicCar;
 	public GameObject explosion;
 
-    private Transform mainPlayerTransform;
+    public Transform mainPlayerTransform;
     //private Transform[,] teamsMembersTransforms;
     //private Character[,] characters;
 

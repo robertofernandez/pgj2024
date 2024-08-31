@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[System.Serializable]
 public class BackgroundTileContainer:IRectangularArea {
     public GameObject tile;
     public int id;
@@ -36,8 +37,9 @@ public class BackgroundTileContainer:IRectangularArea {
         int x = i-1;
         int y = j-1;
 
-        currentX = currentCenterX + x*width;
-        currentY = currentCenterY + y*height;
+        //nos ubicamos a un tile de distancia del centro
+        currentX = currentCenterX + x * width;
+        currentY = currentCenterY + y * height;
         tile.transform.position = new Vector3(currentX, currentY, 0.1f);
     }
 
@@ -56,7 +58,7 @@ public class BackgroundTileContainer:IRectangularArea {
     }
     public float maxY()
     {
-        return currentY - height / 2;
+        return currentY + height / 2;
     }
     public float centerX()
     {
