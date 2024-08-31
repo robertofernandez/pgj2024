@@ -70,3 +70,9 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+/tca/Turismo Costa Argentina/Library
+/tca/Turismo Costa Argentina/Logs
+/tca/Turismo Costa Argentina/ProjectSettings
+/tca/Turismo Costa Argentina/Temp
+/tca/Turismo Costa Argentina/UserSettings
+/tca/Turismo Costa Argentina/obj
