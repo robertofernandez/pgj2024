@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BackgroundTileContainer {
+public class BackgroundTileContainer:IRectangularArea {
     public GameObject tile;
     public int id;
 
@@ -36,6 +36,34 @@ public class BackgroundTileContainer {
         int x = i-1;
         int y = j-1;
 
-        tile.transform.position = new Vector3(currentCenterX + x*width, currentCenterY + y*height, 0.1f);
+        currentX = currentCenterX + x*width;
+        currentY = currentCenterY + y*height;
+        tile.transform.position = new Vector3(currentX, currentY, 0.1f);
+    }
+
+    public float minX()
+    {
+        return currentX - width / 2;
+    }
+    public float maxX()
+    {
+        return currentX + width/2;
+    }
+
+    public float minY()
+    {
+        return currentY - height / 2;
+    }
+    public float maxY()
+    {
+        return currentY - height / 2;
+    }
+    public float centerX()
+    {
+        return currentX;
+    }
+    public float centerY()
+    {
+        return currentY;
     }
 }

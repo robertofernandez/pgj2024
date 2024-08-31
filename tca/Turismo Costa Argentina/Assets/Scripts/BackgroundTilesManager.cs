@@ -5,10 +5,14 @@ public class BackgroundTilesManager : MonoBehaviour {
     public BackgroundTileContainer[,] tilesSet;
     float currentCenterX = 0;
     float currentCenterY = 0;
+    public GameObject charactersManagerGameObject;
+    public CharactersManager charactersManager;
 
 	void Start() 
     {
         Debug.Log("Background Tiles Manager Started");
+
+        charactersManager = charactersManagerGameObject.GetComponent<CharactersManager>();
 
         tilesSet = new BackgroundTileContainer[3, 3];
 
@@ -26,7 +30,43 @@ public class BackgroundTilesManager : MonoBehaviour {
 
     void FixedUpdate()
     {
+        if(charactersManager.getMainPlayerTransform() != null)
+        {
+            float characterX = charactersManager.getMainPlayerTransform().position.x;
+            float characterY = charactersManager.getMainPlayerTransform().position.y;
+            updateGrid(characterX, characterY);
+        }
+
         updatePositions();
+    }
+
+    void updateGrid(float characterX, float characterY)
+    {
+        BackgroundTileContainer center = null;
+        int swapI = 0;
+        int swapJ = 0;
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                BackgroundTileContainer current = tilesSet[i, j];
+                if(MathUtils.contains(current, characterX, characterY))
+                {
+                    center = current;
+                    currentCenterX = center.centerX();
+                    currentCenterY = center.centerY();
+                    swapI = i;
+                    swapJ = j;
+                    break;
+                }
+            }
+        }
+        if (center != null)
+        {
+            BackgroundTileContainer temp = tilesSet[1, 1];
+            tilesSet[1, 1] = center;
+            tilesSet[swapI, swapJ] = temp;
+        }
     }
 
     void updatePositions()
