@@ -114,7 +114,8 @@ public class Character : MonoBehaviour {
         }
 
         // Ajustar la rotación del auto basado en la entrada horizontal
-        float rotationAmount = xInput * 10f * Time.fixedDeltaTime * Mathf.Abs(currentVelocity); // Ajustar el valor para cambiar la sensibilidad del giro
+        //float rotationAmount = xInput * 10f * Time.fixedDeltaTime * Mathf.Abs(currentVelocity); // Ajustar el valor para cambiar la sensibilidad del giro
+        float rotationAmount = xInput * 10f * Time.fixedDeltaTime * currentVelocity;
         body.rotation -= rotationAmount;
 
         // Mover el auto hacia adelante en la dirección de su rotación actual
