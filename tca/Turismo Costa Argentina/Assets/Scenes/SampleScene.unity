@@ -695,6 +695,8 @@ MonoBehaviour:
   singleCurveRoadTile: {fileID: 6342632662098797757, guid: 4e6839c86d484344d943aa722124e48b, type: 3}
   diagonal2x2RoadTile: {fileID: 2060762965287649464, guid: 191d00b86a1fced4899d9a277664961a, type: 3}
   roadTilesetPrototype: {fileID: 1897189861330320586, guid: a4598285e63b3f44ea262307bf902563, type: 3}
+  charactersManagerGameObject: {fileID: 684529368}
+  charactersManager: {fileID: 0}
 --- !u!4 &968237649
 Transform:
   m_ObjectHideFlags: 0
