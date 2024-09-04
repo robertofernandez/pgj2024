@@ -6,20 +6,35 @@ public class MapTilesManager : MonoBehaviour {
     public GameObject singleCurveRoadTile;
     public GameObject diagonal2x2RoadTile;
     public GameObject roadTilesetPrototype;
+
+    public GameObject shoreTile_1_4;
+    public GameObject shoreTile_4_1;
+    public GameObject shoreTile_2_3;
+    public GameObject shoreTile_3_2;
+    public GameObject shoreTile_2_5;
+    public GameObject shoreTile_5_2;
+    public GameObject shoreTile_4_3;
+    public GameObject shoreTile_3_4;
+
     private Dictionary<string, GameObject> tilesDictionary;
     private Dictionary<string, GameObject> roadTilesSetDictionary;
+    private Dictionary<string, GameObject> shoreTilesSetDictionary;
     private GameObject[] allTilesets;
+    private GameObject[] shoreTilesets;
 
     public GameObject charactersManagerGameObject;
     public CharactersManager charactersManager;
 
     private float completeTileSetSize = 21f;
     private float tileSetsAmount = 8f;
+    private float shoreTileSetsAmount = 8f;
+    private float completeShoreTileSetSize = 7f;
 
     public MapTilesManager()
     {
         tilesDictionary = new Dictionary<string,GameObject>();
         roadTilesSetDictionary = new Dictionary<string, GameObject>();
+        shoreTilesSetDictionary = new Dictionary<string, GameObject>();
     }
 
     void Start() 
@@ -27,6 +42,7 @@ public class MapTilesManager : MonoBehaviour {
         charactersManager = charactersManagerGameObject.GetComponent<CharactersManager>();
 
         float initialX = -12f;
+        float initialY = -21f;
         tilesDictionary.Add("single road", singleRoadTile);
         tilesDictionary.Add("single curve road", singleCurveRoadTile);
         tilesDictionary.Add("diagonal 2x2 road", diagonal2x2RoadTile);
@@ -41,14 +57,15 @@ public class MapTilesManager : MonoBehaviour {
         roadTilesSetDictionary.Add("single diagonal straight road2", createSingleDiagonalTileset());
         roadTilesSetDictionary.Add("single left diagonal straight road2", createSingleLeftDiagonalTileset());
         
-        roadTilesSetDictionary["basic straight road"].transform.position = new Vector3(initialX, -21f, 0.2f);
-        roadTilesSetDictionary["single curve straight road"].transform.position = new Vector3(initialX, 0f, 0.2f);
-        roadTilesSetDictionary["single left diagonal straight road"].transform.position = new Vector3(initialX, 21f, 0.2f);
-        roadTilesSetDictionary["basic straight road2"].transform.position = new Vector3(initialX, 42f, 0.2f);
-        roadTilesSetDictionary["single diagonal straight road"].transform.position = new Vector3(initialX, 63f, 0.2f);
-        roadTilesSetDictionary["single left curve straight road"].transform.position = new Vector3(initialX, 84f, 0.2f);
-        roadTilesSetDictionary["single diagonal straight road2"].transform.position = new Vector3(initialX, 105f, 0.2f);
-        roadTilesSetDictionary["single left diagonal straight road2"].transform.position = new Vector3(initialX, 126f, 0.2f);
+
+        roadTilesSetDictionary["basic straight road"].transform.position = new Vector3(initialX, initialY+=21, 0.2f);
+        roadTilesSetDictionary["single curve straight road"].transform.position = new Vector3(initialX, initialY+=21, 0.2f);
+        roadTilesSetDictionary["single left diagonal straight road"].transform.position = new Vector3(initialX, initialY+=21, 0.2f);
+        roadTilesSetDictionary["basic straight road2"].transform.position = new Vector3(initialX, initialY+=21, 0.2f);
+        roadTilesSetDictionary["single diagonal straight road"].transform.position = new Vector3(initialX, initialY+=21, 0.2f);
+        roadTilesSetDictionary["single left curve straight road"].transform.position = new Vector3(initialX, initialY+=21, 0.2f);
+        roadTilesSetDictionary["single diagonal straight road2"].transform.position = new Vector3(initialX, initialY+=21, 0.2f);
+        roadTilesSetDictionary["single left diagonal straight road2"].transform.position = new Vector3(initialX, initialY+=21, 0.2f);
 
         allTilesets = new GameObject[8];
 
@@ -60,6 +77,37 @@ public class MapTilesManager : MonoBehaviour {
         allTilesets[5] = roadTilesSetDictionary["single left curve straight road"];
         allTilesets[6] = roadTilesSetDictionary["single diagonal straight road2"];
         allTilesets[7] = roadTilesSetDictionary["single left diagonal straight road2"];
+
+        shoreTilesSetDictionary.Add("1-4", createShoreTile_1_4());
+        shoreTilesSetDictionary.Add("4-1", createShoreTile_4_1());
+        shoreTilesSetDictionary.Add("2-3", createShoreTile_2_3());
+        shoreTilesSetDictionary.Add("3-2", createShoreTile_3_2());
+        shoreTilesSetDictionary.Add("3-4", createShoreTile_3_4());
+        shoreTilesSetDictionary.Add("4-3", createShoreTile_4_3());
+        shoreTilesSetDictionary.Add("2-5", createShoreTile_2_5());
+        shoreTilesSetDictionary.Add("5-2", createShoreTile_5_2());
+
+        initialX = 6f;
+        initialY = -7f;
+        shoreTilesSetDictionary["3-4"].transform.position = new Vector3(initialX, initialY+=completeShoreTileSetSize, -0.2f);
+        shoreTilesSetDictionary["4-1"].transform.position = new Vector3(initialX, initialY+=completeShoreTileSetSize, -0.2f);
+        shoreTilesSetDictionary["1-4"].transform.position = new Vector3(initialX, initialY+=completeShoreTileSetSize, -0.2f);
+        shoreTilesSetDictionary["4-3"].transform.position = new Vector3(initialX, initialY+=completeShoreTileSetSize, -0.2f);
+        shoreTilesSetDictionary["3-2"].transform.position = new Vector3(initialX, initialY+=completeShoreTileSetSize, -0.2f);
+        shoreTilesSetDictionary["2-5"].transform.position = new Vector3(initialX, initialY+=completeShoreTileSetSize, -0.2f);
+        shoreTilesSetDictionary["5-2"].transform.position = new Vector3(initialX, initialY+=completeShoreTileSetSize, -0.2f);
+        shoreTilesSetDictionary["2-3"].transform.position = new Vector3(initialX, initialY+=completeShoreTileSetSize, -0.2f);
+
+        shoreTilesets = new GameObject[8];
+        int i = 0;
+        shoreTilesets[i++] = shoreTilesSetDictionary["3-4"];
+        shoreTilesets[i++] = shoreTilesSetDictionary["4-1"];
+        shoreTilesets[i++] = shoreTilesSetDictionary["1-4"];
+        shoreTilesets[i++] = shoreTilesSetDictionary["4-3"];
+        shoreTilesets[i++] = shoreTilesSetDictionary["3-2"];
+        shoreTilesets[i++] = shoreTilesSetDictionary["2-5"];
+        shoreTilesets[i++] = shoreTilesSetDictionary["5-2"];
+        shoreTilesets[i++] = shoreTilesSetDictionary["2-3"];
     }
 
     void FixedUpdate()
@@ -73,10 +121,23 @@ public class MapTilesManager : MonoBehaviour {
         {
             float characterX = charactersManager.getMainPlayerTransform().position.x;
             float characterY = charactersManager.getMainPlayerTransform().position.y;
+            updateGenericTilesSetPositions(allTilesets, tileSetsAmount, completeTileSetSize, characterX, characterY);
+            updateGenericTilesSetPositions(shoreTilesets, shoreTileSetsAmount, completeShoreTileSetSize, characterX, characterY);
+        }
+        else
+        {
+            Debug.Log("no player transform");
+        }
+    }
 
+    /**
+     * Made to update vertical single set updates based ob character position. Should be used only for those kind of repetitive elements.
+     */
+    public void updateGenericTilesSetPositions(GameObject[] tileSets, float tileSetsAmount, float completeTileSetSize, float characterX, float characterY)
+    {
             for(int i=0; i < tileSetsAmount; i++)
             {
-                Vector3 position = allTilesets[i].transform.position;
+                Vector3 position = tileSets[i].transform.position;
                 float distance = Mathf.Abs(position.y - characterY);
                 float maxDist = (completeTileSetSize * tileSetsAmount) / 2;
                 if(distance > maxDist) 
@@ -91,7 +152,7 @@ public class MapTilesManager : MonoBehaviour {
                     {
                         newY = position.y + completeTileSetSize * tileSetsAmount;
                     }
-                    allTilesets[i].transform.position = new Vector3(position.x, newY, position.z);
+                    tileSets[i].transform.position = new Vector3(position.x, newY, position.z);
                 }
                 /*
                 else
@@ -99,11 +160,6 @@ public class MapTilesManager : MonoBehaviour {
                     Debug.Log("OK, " + distance + " <= " + maxDist);
                 }*/
             }
-        }
-        else
-        {
-            Debug.Log("no player transform");
-        }
     }
 
     public GameObject createSingleDiagonalTileset()
@@ -244,4 +300,53 @@ public class MapTilesManager : MonoBehaviour {
         GameObject instantiatedPrefab = Instantiate(roadTilesetPrototype, position, rotation);
         return instantiatedPrefab;
     }
+
+    public GameObject instantiateObject(GameObject gameObject)
+    {
+        Vector3 position = new Vector3(0, 0, 0.2f);
+        Quaternion rotation = Quaternion.identity;
+        GameObject instantiatedPrefab = Instantiate(gameObject, position, rotation);
+        return instantiatedPrefab;
+    }
+
+    public GameObject createShoreTile_1_4()
+    {
+        return instantiateObject(shoreTile_1_4);
+    }
+
+    public GameObject createShoreTile_4_1()
+    {
+        return instantiateObject(shoreTile_4_1);
+    }
+
+    public GameObject createShoreTile_2_3()
+    {
+        return instantiateObject(shoreTile_2_3);
+    }
+
+    public GameObject createShoreTile_3_2()
+    {
+        return instantiateObject(shoreTile_3_2);
+    }
+
+    public GameObject createShoreTile_4_3()
+    {
+        return instantiateObject(shoreTile_4_3);
+    }
+
+    public GameObject createShoreTile_3_4()
+    {
+        return instantiateObject(shoreTile_3_4);
+    }
+
+    public GameObject createShoreTile_2_5()
+    {
+        return instantiateObject(shoreTile_2_5);
+    }
+
+    public GameObject createShoreTile_5_2()
+    {
+        return instantiateObject(shoreTile_5_2);
+    }
+
 }
