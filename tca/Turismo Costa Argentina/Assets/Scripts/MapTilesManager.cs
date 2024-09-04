@@ -16,11 +16,16 @@ public class MapTilesManager : MonoBehaviour {
     public GameObject shoreTile_4_3;
     public GameObject shoreTile_3_4;
 
+    public GameObject baseSeaTile;
+
     private Dictionary<string, GameObject> tilesDictionary;
     private Dictionary<string, GameObject> roadTilesSetDictionary;
     private Dictionary<string, GameObject> shoreTilesSetDictionary;
     private GameObject[] allTilesets;
     private GameObject[] shoreTilesets;
+
+    private GameObject[] baseSeaTilesets;
+    private GameObject[] baseSeaTilesets2;
 
     public GameObject charactersManagerGameObject;
     public CharactersManager charactersManager;
@@ -29,6 +34,8 @@ public class MapTilesManager : MonoBehaviour {
     private float tileSetsAmount = 8f;
     private float shoreTileSetsAmount = 8f;
     private float completeShoreTileSetSize = 7f;
+    private float baseSeaTilesetsAmount = 3f;
+    private float baseSeaTilesetSize = 7f;
 
     public MapTilesManager()
     {
@@ -56,7 +63,6 @@ public class MapTilesManager : MonoBehaviour {
         roadTilesSetDictionary.Add("single left diagonal straight road", createSingleLeftDiagonalTileset());
         roadTilesSetDictionary.Add("single diagonal straight road2", createSingleDiagonalTileset());
         roadTilesSetDictionary.Add("single left diagonal straight road2", createSingleLeftDiagonalTileset());
-        
 
         roadTilesSetDictionary["basic straight road"].transform.position = new Vector3(initialX, initialY+=21, 0.2f);
         roadTilesSetDictionary["single curve straight road"].transform.position = new Vector3(initialX, initialY+=21, 0.2f);
@@ -108,6 +114,29 @@ public class MapTilesManager : MonoBehaviour {
         shoreTilesets[i++] = shoreTilesSetDictionary["2-5"];
         shoreTilesets[i++] = shoreTilesSetDictionary["5-2"];
         shoreTilesets[i++] = shoreTilesSetDictionary["2-3"];
+
+        initialX = 13f;
+        initialY = -7f;
+
+        baseSeaTilesets = new GameObject[3];
+        baseSeaTilesets[0] = createBaseSeaTile();
+        baseSeaTilesets[1] = createBaseSeaTile();
+        baseSeaTilesets[2] = createBaseSeaTile();
+        baseSeaTilesets[0].transform.position = new Vector3(initialX, initialY+=baseSeaTilesetSize, -0.2f);
+        baseSeaTilesets[1].transform.position = new Vector3(initialX, initialY+=baseSeaTilesetSize, -0.2f);
+        baseSeaTilesets[2].transform.position = new Vector3(initialX, initialY+=baseSeaTilesetSize, -0.2f);
+
+        initialX = 20f;
+        initialY = -7f;
+
+        baseSeaTilesets2 = new GameObject[3];
+        baseSeaTilesets2[0] = createBaseSeaTile();
+        baseSeaTilesets2[1] = createBaseSeaTile();
+        baseSeaTilesets2[2] = createBaseSeaTile();
+        baseSeaTilesets2[0].transform.position = new Vector3(initialX, initialY+=baseSeaTilesetSize, -0.2f);
+        baseSeaTilesets2[1].transform.position = new Vector3(initialX, initialY+=baseSeaTilesetSize, -0.2f);
+        baseSeaTilesets2[2].transform.position = new Vector3(initialX, initialY+=baseSeaTilesetSize, -0.2f);
+
     }
 
     void FixedUpdate()
@@ -123,6 +152,8 @@ public class MapTilesManager : MonoBehaviour {
             float characterY = charactersManager.getMainPlayerTransform().position.y;
             updateGenericTilesSetPositions(allTilesets, tileSetsAmount, completeTileSetSize, characterX, characterY);
             updateGenericTilesSetPositions(shoreTilesets, shoreTileSetsAmount, completeShoreTileSetSize, characterX, characterY);
+            updateGenericTilesSetPositions(baseSeaTilesets, baseSeaTilesetsAmount, baseSeaTilesetSize, characterX, characterY);
+            updateGenericTilesSetPositions(baseSeaTilesets2, baseSeaTilesetsAmount, baseSeaTilesetSize, characterX, characterY);
         }
         else
         {
@@ -307,6 +338,11 @@ public class MapTilesManager : MonoBehaviour {
         Quaternion rotation = Quaternion.identity;
         GameObject instantiatedPrefab = Instantiate(gameObject, position, rotation);
         return instantiatedPrefab;
+    }
+
+    public GameObject createBaseSeaTile()
+    {
+        return instantiateObject(baseSeaTile);
     }
 
     public GameObject createShoreTile_1_4()

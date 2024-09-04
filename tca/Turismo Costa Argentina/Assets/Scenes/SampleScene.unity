@@ -578,6 +578,7 @@ MonoBehaviour:
   shoreTile_5_2: {fileID: 3644863757080858248, guid: 6148f8761d1869b49a2714d11b19f5bc, type: 3}
   shoreTile_4_3: {fileID: 1489629122676059274, guid: 818e25585226e0b408769ba45697a4f8, type: 3}
   shoreTile_3_4: {fileID: 2779388912217232162, guid: 78dd166c1a793f84ebc5419c0f322543, type: 3}
+  baseSeaTile: {fileID: 2839648487024614099, guid: d0af217c19065e247a5f6e49655f931a, type: 3}
   charactersManagerGameObject: {fileID: 684529368}
   charactersManager: {fileID: 0}
 --- !u!4 &968237649
