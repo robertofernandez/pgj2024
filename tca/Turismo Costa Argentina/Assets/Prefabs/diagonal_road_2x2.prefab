@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2246980400778728425}
   - component: {fileID: 3100172089510975055}
   - component: {fileID: 1503691826401975983}
+  - component: {fileID: 1172940339682318310}
   m_Layer: 0
   m_Name: diagonal_road_2x2
   m_TagString: Untagged
@@ -149,3 +150,15 @@ PolygonCollider2D:
       - {x: 0.03, y: -0.62}
       - {x: 0.14, y: -0.42}
   m_UseDelaunayMesh: 0
+--- !u!114 &1172940339682318310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060762965287649464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683f4dd273219c443a68398fc7169c52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

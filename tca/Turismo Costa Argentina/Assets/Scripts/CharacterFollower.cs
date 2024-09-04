@@ -20,6 +20,6 @@ public class CharacterFollower : MonoBehaviour {
 		if(characterTransform == null) {
 			Debug.Log("characterTransform null");
 		}
-		transform.position = new Vector3(characterTransform.position.x, characterTransform.position.y, transform.position.z);
+		transform.position = new Vector3(characterTransform.position.x, characterTransform.position.y + 2, transform.position.z);
 	}
 }

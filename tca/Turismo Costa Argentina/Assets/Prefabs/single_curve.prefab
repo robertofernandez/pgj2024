@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 236986091658840244}
   - component: {fileID: 3895356248487660078}
   - component: {fileID: 3551970843543049217}
+  - component: {fileID: 1140979397909121297}
   m_Layer: 0
   m_Name: single_curve
   m_TagString: Untagged
@@ -137,3 +138,15 @@ PolygonCollider2D:
       - {x: 0.5, y: -0.44}
       - {x: 0.5, y: 0.45999998}
   m_UseDelaunayMesh: 0
+--- !u!114 &1140979397909121297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6342632662098797757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683f4dd273219c443a68398fc7169c52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
