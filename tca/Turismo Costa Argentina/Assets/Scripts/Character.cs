@@ -18,6 +18,8 @@ public class Character : MonoBehaviour {
 
     public CharactersManager manager;
 
+    string terrain = TerrainConstants.ROAD;
+
     void Start () {
         //animator = GetComponent<Animator>();
         body = GetComponent<Rigidbody2D>();
@@ -27,6 +29,14 @@ public class Character : MonoBehaviour {
 
     void FixedUpdate()
     {
+        if(terrain == TerrainConstants.SAND)
+        {
+            if(currentVelocity > maxVelocity)
+            {
+                currentVelocity = Mathf.Max(maxVelocity, currentVelocity / 1.1f);
+            }
+        }
+
         // Obtener la entrada del jugador
         xInput = Input.GetAxis("Horizontal");
         yInput = Input.GetAxis("Vertical");
@@ -35,7 +45,7 @@ public class Character : MonoBehaviour {
         {
             if (yInput > 0)
             {
-                Debug.Log("Acelerando");
+                //Debug.Log("Acelerando");
                 currentVelocity += velocityIncreaseRate;
                 if(currentVelocity > maxVelocity)
                 {
@@ -44,7 +54,7 @@ public class Character : MonoBehaviour {
             }
             else if (yInput == 0)
             {
-                Debug.Log("Desacelerando");
+                //Debug.Log("Desacelerando");
                 currentVelocity -= velocityDesacelerationDecreaseRate;
                 if(currentVelocity < 0)
                 {
@@ -53,7 +63,7 @@ public class Character : MonoBehaviour {
             }
             else
             {
-                Debug.Log("Frenando");
+                //Debug.Log("Frenando");
                 currentVelocity -= velocityBrakeDecreaseRate;
                 if(currentVelocity < 0)
                 {
@@ -65,7 +75,7 @@ public class Character : MonoBehaviour {
         {
             if (yInput > 0)
             {
-                Debug.Log("Frenando para adelante");
+                //Debug.Log("Frenando para adelante");
                 currentVelocity += velocityBrakeDecreaseRate;
                 if(currentVelocity > 0)
                 {
@@ -74,7 +84,7 @@ public class Character : MonoBehaviour {
             }
             else if (yInput == 0)
             {
-                Debug.Log("Desacelerando marcha atras");
+                //Debug.Log("Desacelerando marcha atras");
                 currentVelocity += velocityDesacelerationDecreaseRate;
                 if(currentVelocity > 0)
                 {
@@ -83,7 +93,7 @@ public class Character : MonoBehaviour {
             }
             else
             {
-                Debug.Log("Acelerando para atras");
+                //Debug.Log("Acelerando para atras");
                 currentVelocity -= velocityIncreaseRate;
                 if(currentVelocity < -maxVelocity)
                 {
@@ -95,7 +105,7 @@ public class Character : MonoBehaviour {
         {
             if (yInput > 0)
             {
-                Debug.Log("Acelerando");
+                //Debug.Log("Acelerando");
                 currentVelocity += velocityIncreaseRate;
                 if(currentVelocity > maxVelocity)
                 {
@@ -104,7 +114,7 @@ public class Character : MonoBehaviour {
             }
             else if (yInput < 0)
             {
-                Debug.Log("Acelerando para atras");
+                //Debug.Log("Acelerando para atras");
                 currentVelocity -= velocityIncreaseRate;
                 if(currentVelocity < -maxVelocity)
                 {
@@ -123,6 +133,26 @@ public class Character : MonoBehaviour {
         body.velocity = forward * currentVelocity;
     }
 
+    public string GetUnitName()
+    {
+        return "Car";
+    }
+
+    public void SetRoadSpeed()
+    {
+        terrain = TerrainConstants.ROAD;
+        maxVelocity = 20;
+    }
+
+    public void SetSandSpeed()
+    {
+        terrain = TerrainConstants.SAND;
+        maxVelocity = 8;
+        if(currentVelocity > maxVelocity)
+        {
+            currentVelocity = Mathf.Max(maxVelocity, currentVelocity / 1.5f);
+        }
+    }
 
 
 }

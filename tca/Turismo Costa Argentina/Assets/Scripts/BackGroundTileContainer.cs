@@ -24,7 +24,7 @@ public class BackgroundTileContainer:IRectangularArea {
 
             width = size.x;
             height = size.y;
-            Debug.Log($"Ancho tile: {width}, Alto tile: {height}");
+            //Debug.Log($"Ancho tile: {width}, Alto tile: {height}");
         }
         else
         {
