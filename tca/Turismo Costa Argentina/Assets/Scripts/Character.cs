@@ -29,6 +29,11 @@ public class Character : MonoBehaviour {
 		body.gravityScale = 0;
     }
 
+    public void SetManager(CharactersManager charactersManager)
+    {
+        manager = charactersManager;
+    }
+
     void FixedUpdate()
     {
         if(terrain == TerrainConstants.SAND)
@@ -128,6 +133,8 @@ public class Character : MonoBehaviour {
         // Ajustar la rotación del auto basado en la entrada horizontal
         //float rotationAmount = xInput * 10f * Time.fixedDeltaTime * Mathf.Abs(currentVelocity); // Ajustar el valor para cambiar la sensibilidad del giro
         float realVelocity = body.velocity.magnitude;
+        manager.SetCurrentSpeed(realVelocity);
+
         Debug.Log("real velocity: " + realVelocity);
         if(currentVelocity < 0) {
             realVelocity = -1 * realVelocity;

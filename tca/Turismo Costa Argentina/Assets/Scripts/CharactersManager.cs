@@ -20,6 +20,8 @@ public class CharactersManager : MonoBehaviour {
 	
 	public string status = "initialized";
 
+    public float currentSpeed = 0;
+
 	void Start() 
     {
         Debug.Log("Characters Manager Started");
@@ -40,6 +42,7 @@ public class CharactersManager : MonoBehaviour {
         Vector3 position = new Vector3(x, y, 0);
         Quaternion rotation = Quaternion.identity;
         GameObject instantiatedPrefab = Instantiate(basicCar, position, rotation);
+        instantiatedPrefab.GetComponent<Character>().SetManager(this);
         return instantiatedPrefab;
     }
 
@@ -84,4 +87,14 @@ public class CharactersManager : MonoBehaviour {
 	{
 		return mainPlayerTransform;
 	}
+
+    public void SetCurrentSpeed(float currentSpeed)
+    {
+        this.currentSpeed = currentSpeed;
+    }
+
+    public float GetCurrentSpeed()
+    {
+        return currentSpeed;
+    }
 }
