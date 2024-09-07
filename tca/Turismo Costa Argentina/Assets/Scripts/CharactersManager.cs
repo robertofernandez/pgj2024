@@ -28,7 +28,7 @@ public class CharactersManager : MonoBehaviour {
         //teamsMembersTransforms = new Transform[teamsAmount,charactersAmount];
         //characters = new Character[teamsAmount,charactersAmount];
 
-        GameObject playerCar = instantiatePlayerCar(0f, 0f);
+        GameObject playerCar = instantiatePlayerCar(-5.15f, 6f);
         mainPlayerTransform = playerCar.transform;
     }
 

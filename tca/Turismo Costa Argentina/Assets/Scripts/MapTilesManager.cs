@@ -2,6 +2,9 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class MapTilesManager : MonoBehaviour {
+    public GameObject startLine;
+    public GameObject finishLine;
+
     public GameObject singleRoadTile;
     public GameObject singleCurveRoadTile;
     public GameObject diagonal2x2RoadTile;
@@ -50,6 +53,12 @@ public class MapTilesManager : MonoBehaviour {
     void Start() 
     {
         charactersManager = charactersManagerGameObject.GetComponent<CharactersManager>();
+
+        //GameObject playerCar = instantiatePlayerCar(-5.15f, 6f);
+        startLine.transform.position = new Vector3(-6.24f, 7.72f, 0.2f);
+
+        //TODO move to finish
+        finishLine.transform.position = new Vector3(-6.24f, 12.2f, 0.2f);
 
         tilesDictionary.Add("single road", singleRoadTile);
         tilesDictionary.Add("single curve road", singleCurveRoadTile);
