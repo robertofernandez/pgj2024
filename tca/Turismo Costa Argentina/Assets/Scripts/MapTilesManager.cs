@@ -30,12 +30,15 @@ public class MapTilesManager : MonoBehaviour {
     public GameObject charactersManagerGameObject;
     public CharactersManager charactersManager;
 
-    private float completeTileSetSize = 21f;
+    private float completeTileSetSize = 21f * 1.5f;
     private float tileSetsAmount = 8f;
     private float shoreTileSetsAmount = 8f;
     private float completeShoreTileSetSize = 7f;
     private float baseSeaTilesetsAmount = 3f;
     private float baseSeaTilesetSize = 7f;
+
+    private float roadTileSizeX = 3f * 1.5f;
+    private float roadTileSizeY = 3f * 1.5f;
 
     public MapTilesManager()
     {
@@ -48,11 +51,14 @@ public class MapTilesManager : MonoBehaviour {
     {
         charactersManager = charactersManagerGameObject.GetComponent<CharactersManager>();
 
-        float initialX = -12f;
-        float initialY = -21f;
         tilesDictionary.Add("single road", singleRoadTile);
         tilesDictionary.Add("single curve road", singleCurveRoadTile);
         tilesDictionary.Add("diagonal 2x2 road", diagonal2x2RoadTile);
+
+        float initialX = -22f;
+        float initialY = -21f;
+
+        float tileSizeY = 21 * 1.5f;
 
         //roadTilesSetDictionary.Add("basic horizontal straight road", createHorizontalBasicStraightTileset());
         roadTilesSetDictionary.Add("basic straight road", createBasicStraightTileset());
@@ -64,14 +70,14 @@ public class MapTilesManager : MonoBehaviour {
         roadTilesSetDictionary.Add("single diagonal straight road2", createSingleDiagonalTileset());
         roadTilesSetDictionary.Add("single left diagonal straight road2", createSingleLeftDiagonalTileset());
 
-        roadTilesSetDictionary["basic straight road"].transform.position = new Vector3(initialX, initialY+=21, 0.2f);
-        roadTilesSetDictionary["single curve straight road"].transform.position = new Vector3(initialX, initialY+=21, 0.2f);
-        roadTilesSetDictionary["single left diagonal straight road"].transform.position = new Vector3(initialX, initialY+=21, 0.2f);
-        roadTilesSetDictionary["basic straight road2"].transform.position = new Vector3(initialX, initialY+=21, 0.2f);
-        roadTilesSetDictionary["single diagonal straight road"].transform.position = new Vector3(initialX, initialY+=21, 0.2f);
-        roadTilesSetDictionary["single left curve straight road"].transform.position = new Vector3(initialX, initialY+=21, 0.2f);
-        roadTilesSetDictionary["single diagonal straight road2"].transform.position = new Vector3(initialX, initialY+=21, 0.2f);
-        roadTilesSetDictionary["single left diagonal straight road2"].transform.position = new Vector3(initialX, initialY+=21, 0.2f);
+        roadTilesSetDictionary["basic straight road"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
+        roadTilesSetDictionary["single curve straight road"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
+        roadTilesSetDictionary["single left diagonal straight road"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
+        roadTilesSetDictionary["basic straight road2"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
+        roadTilesSetDictionary["single diagonal straight road"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
+        roadTilesSetDictionary["single left curve straight road"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
+        roadTilesSetDictionary["single diagonal straight road2"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
+        roadTilesSetDictionary["single left diagonal straight road2"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
 
         allTilesets = new GameObject[8];
 
@@ -290,12 +296,10 @@ public class MapTilesManager : MonoBehaviour {
      */
     public void addTile(GameObject tileSet, GameObject tile, float positionX, float positionY, bool flippedX, bool flippedY, string direction)
     {
-        float sizeX = 3f; //make configurable
-        float sizeY = 3f; //make configurable
         tile.transform.SetParent(tileSet.transform);
 
-        float newX = positionX * sizeX;
-        float newY = positionY * sizeY;
+        float newX = positionX * roadTileSizeX;
+        float newY = positionY * roadTileSizeY;
 
         tile.transform.localPosition = new Vector3(newX, newY, 0);
 

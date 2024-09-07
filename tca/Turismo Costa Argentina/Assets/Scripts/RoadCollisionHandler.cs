@@ -2,6 +2,17 @@ using UnityEngine;
 
 public class RoadCollisionHandler : MonoBehaviour
 {
+    //private Rigidbody2D body;
+
+    void Start()
+    {
+        //body = GetComponent<Rigidbody2D>();
+        //transform.localScale = new Vector3(0.3f, 0.6f, 1f);
+        Vector3 currentScale = transform.localScale;
+
+        // Modifica el ancho (escala x) a el doble
+        transform.localScale = new Vector3(currentScale.x * 1.5f, currentScale.y * 1.5f, currentScale.z);
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("algo colisiono");
