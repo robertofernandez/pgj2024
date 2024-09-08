@@ -5,10 +5,10 @@ public class Barrel : MonoBehaviour
     bool setToDissapear = false;
     int ciclesToDissapear = 0;
     private SpriteRenderer spriteRenderer;
-    private Collider2D collider2D;
+    //private Collider2D collider2D;
     void Start () {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        collider2D = GetComponent<Collider2D>();
+        //collider2D = GetComponent<Collider2D>();
     }
 
     void FixedUpdate()
@@ -20,7 +20,7 @@ public class Barrel : MonoBehaviour
             {
                 setToDissapear = false;
                 spriteRenderer.enabled = false;
-                collider2D.enabled = false;
+                GetComponent<Collider2D>().enabled = false;
             }
         }
     }

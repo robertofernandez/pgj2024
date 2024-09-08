@@ -6,7 +6,7 @@ public class MapTilesManager : MonoBehaviour {
     public GameObject finishLine;
 
     public GameObject singleRoadTile;
-    public GameObject singleCurveRoadTile;
+    public GameObject singleCurveStraightRoadTile;
     public GameObject diagonal2x2RoadTile;
     public GameObject roadTilesetPrototype;
 
@@ -43,31 +43,40 @@ public class MapTilesManager : MonoBehaviour {
     private float roadTileSizeX = 3f * 1.5f;
     private float roadTileSizeY = 3f * 1.5f;
 
+    private float initialMapX = -22f;
+    private float initialMapY = -21f * 1.5f;
+
+    private float tileSizeY = 21 * 1.5f;
+
+    private MapLogicManager mapLogicManager;
+
     public MapTilesManager()
     {
         tilesDictionary = new Dictionary<string,GameObject>();
         roadTilesSetDictionary = new Dictionary<string, GameObject>();
         shoreTilesSetDictionary = new Dictionary<string, GameObject>();
+        mapLogicManager = new MapLogicManager(tileSizeY, -1 * tileSizeY / 2);
     }
 
     void Start() 
     {
+        float initialX = -22f;
+        float initialY = -21f * 1.5f;
+
+        //TODO make configurable
+        int totalTilesSetInMap = 50;
+
+        //float finalY = 1400f;
+        float finalY = 400f;
+
         charactersManager = charactersManagerGameObject.GetComponent<CharactersManager>();
 
         //GameObject playerCar = instantiatePlayerCar(-5.15f, 6f);
-        startLine.transform.position = new Vector3(-6.24f, 7.72f, 0.2f);
-
-        //TODO move to finish
-        finishLine.transform.position = new Vector3(-6.24f, 12.2f, 0.2f);
+        startLine.transform.position = new Vector3(-6.24f, 7.72f, 0.2f);      
 
         tilesDictionary.Add("single road", singleRoadTile);
-        tilesDictionary.Add("single curve road", singleCurveRoadTile);
+        tilesDictionary.Add("single curve road", singleCurveStraightRoadTile);
         tilesDictionary.Add("diagonal 2x2 road", diagonal2x2RoadTile);
-
-        float initialX = -22f;
-        float initialY = -21f;
-
-        float tileSizeY = 21 * 1.5f;
 
         //roadTilesSetDictionary.Add("basic horizontal straight road", createHorizontalBasicStraightTileset());
         roadTilesSetDictionary.Add("basic straight road", createBasicStraightTileset());
@@ -80,13 +89,41 @@ public class MapTilesManager : MonoBehaviour {
         roadTilesSetDictionary.Add("single left diagonal straight road2", createSingleLeftDiagonalTileset());
 
         roadTilesSetDictionary["basic straight road"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
+        mapLogicManager.AddOrderedDescriptor(initialY, new SingleRoadZoneDescriptor(initialX, initialY));
         roadTilesSetDictionary["single curve straight road"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
+        mapLogicManager.AddOrderedDescriptor(initialY, new SingleRightCurveStraightRoadZoneDescriptor(initialX, initialY));
         roadTilesSetDictionary["single left diagonal straight road"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
+        mapLogicManager.AddOrderedDescriptor(initialY, new SingleLeftCurveStraightRoadZoneDescriptor(initialX, initialY));
         roadTilesSetDictionary["basic straight road2"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
+        mapLogicManager.AddOrderedDescriptor(initialY, new SingleRoadZoneDescriptor(initialX, initialY));
         roadTilesSetDictionary["single diagonal straight road"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
+        mapLogicManager.AddOrderedDescriptor(initialY, new SingleRightDiagonalStraightRoadZoneDescriptor(initialX, initialY));
         roadTilesSetDictionary["single left curve straight road"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
+        mapLogicManager.AddOrderedDescriptor(initialY, new SingleLeftCurveStraightRoadZoneDescriptor(initialX, initialY));
         roadTilesSetDictionary["single diagonal straight road2"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
+        mapLogicManager.AddOrderedDescriptor(initialY, new SingleRightDiagonalStraightRoadZoneDescriptor(initialX, initialY));
         roadTilesSetDictionary["single left diagonal straight road2"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
+        mapLogicManager.AddOrderedDescriptor(initialY, new SingleLeftDiagonalStraightRoadZoneDescriptor(initialX, initialY));
+
+        for(int k = 0; k < totalTilesSetInMap; k++)
+        {
+            mapLogicManager.AddOrderedDescriptor(initialY, new SingleRoadZoneDescriptor(initialX, initialY+=tileSizeY));
+            mapLogicManager.AddOrderedDescriptor(initialY, new SingleRightCurveStraightRoadZoneDescriptor(initialX, initialY+=tileSizeY));
+            mapLogicManager.AddOrderedDescriptor(initialY, new SingleLeftCurveStraightRoadZoneDescriptor(initialX, initialY+=tileSizeY));
+            mapLogicManager.AddOrderedDescriptor(initialY, new SingleRoadZoneDescriptor(initialX, initialY+=tileSizeY));
+            mapLogicManager.AddOrderedDescriptor(initialY, new SingleRightDiagonalStraightRoadZoneDescriptor(initialX, initialY+=tileSizeY));
+            mapLogicManager.AddOrderedDescriptor(initialY, new SingleLeftCurveStraightRoadZoneDescriptor(initialX, initialY+=tileSizeY));
+            mapLogicManager.AddOrderedDescriptor(initialY, new SingleRightDiagonalStraightRoadZoneDescriptor(initialX, initialY+=tileSizeY));
+            mapLogicManager.AddOrderedDescriptor(initialY, new SingleLeftDiagonalStraightRoadZoneDescriptor(initialX, initialY+=tileSizeY));
+        }
+        Debug.Log("Max index in map: " + mapLogicManager.GetMaxIndex());
+        Debug.Log("Max y in map: " + mapLogicManager.GetMaxY());
+
+        MapZoneDescriptor finalTilesetDescriptor = mapLogicManager.GetMapZoneDescriptorOfTypeSurrounding(MapZoneDescriptor.SINGLE_ROAD, finalY);
+
+        //finishLine.transform.position = new Vector3(finalTilesetDescriptor.CenterX, finalTilesetDescriptor.CenterY, 0.2f);
+        //FIXME: CHECK WHY
+        finishLine.transform.position = new Vector3(-6.24f, finalTilesetDescriptor.CenterY, 0.2f);
 
         allTilesets = new GameObject[8];
 

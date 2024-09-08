@@ -795,7 +795,7 @@ MonoBehaviour:
   startLine: {fileID: 7556579874892135860}
   finishLine: {fileID: 8723948335768914786}
   singleRoadTile: {fileID: 5675552694504519364, guid: 4ef06f1db173c514cb0320b0a53fe1ae, type: 3}
-  singleCurveRoadTile: {fileID: 6342632662098797757, guid: 4e6839c86d484344d943aa722124e48b, type: 3}
+  singleCurveStraightRoadTile: {fileID: 6342632662098797757, guid: 4e6839c86d484344d943aa722124e48b, type: 3}
   diagonal2x2RoadTile: {fileID: 2060762965287649464, guid: 191d00b86a1fced4899d9a277664961a, type: 3}
   roadTilesetPrototype: {fileID: 1897189861330320586, guid: a4598285e63b3f44ea262307bf902563, type: 3}
   shoreTile_1_4: {fileID: 117898800902664299, guid: 857d0227cc6a85545a779c955c4ce3c6, type: 3}
