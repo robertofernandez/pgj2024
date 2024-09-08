@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour {
     private Rigidbody2D body;
@@ -143,6 +144,10 @@ public class Character : MonoBehaviour {
         if (acelerando)
         {
             fuelAmount = fuelAmount - 2;
+            if(fuelAmount < 1)
+            {
+                QuitGame();
+            }
         }
 
         // Ajustar la rotación del auto basado en la entrada horizontal
@@ -193,5 +198,10 @@ public class Character : MonoBehaviour {
         fuelAmount = Mathf.Min(maxFuelAmount, fuelAmount + 500);
     }
 
+    public void QuitGame()
+    {
+        Debug.Log("Quitting game");
+        Application.Quit();
+    }
 
 }
