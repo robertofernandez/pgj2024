@@ -5,6 +5,8 @@ public class MapTilesManager : MonoBehaviour {
     public GameObject startLine;
     public GameObject finishLine;
 
+    public GameObject barrelPrototype;
+
     public GameObject singleRoadTile;
     public GameObject singleCurveStraightRoadTile;
     public GameObject diagonal2x2RoadTile;
@@ -129,6 +131,29 @@ public class MapTilesManager : MonoBehaviour {
         finishLine.transform.position = new Vector3(-6.24f, finalTilesetDescriptor.CenterY, 0.2f);
 
         mapFinalY = finalTilesetDescriptor.CenterY;
+
+        for(int barrelNumber = 1; barrelNumber < 10; barrelNumber++)
+        {
+            float barrelY = (float) barrelNumber * completeTileSetSize * tileSetsAmount;
+            MapZoneDescriptor tilesetDescriptor = mapLogicManager.GetMapZoneDescriptorOfTypeSurrounding(MapZoneDescriptor.SINGLE_ROAD, barrelY);
+            GameObject barrelObject = instantiateObject(barrelPrototype);
+            Barrel barrel = barrelObject.GetComponent<Barrel>();
+            barrel.characterManager = charactersManager;
+            Debug.Log("putting a barrel near to " + barrelY + "(" +tilesetDescriptor.CenterY + ")");
+            barrel.transform.position = new Vector3(-6.24f, tilesetDescriptor.CenterY, 0.2f);
+
+            barrelObject = instantiateObject(barrelPrototype);
+            barrel = barrelObject.GetComponent<Barrel>();
+            barrel.characterManager = charactersManager;
+            //TODO hacer algo random
+            barrel.transform.position = new Vector3(-7.24f, tilesetDescriptor.CenterY + 2f, 0.2f);
+
+            barrelObject = instantiateObject(barrelPrototype);
+            barrel = barrelObject.GetComponent<Barrel>();
+            barrel.characterManager = charactersManager;
+            barrel.transform.position = new Vector3(-5.5f, tilesetDescriptor.CenterY + 2.5f, 0.2f);
+
+        }
 
         allTilesets = new GameObject[8];
 

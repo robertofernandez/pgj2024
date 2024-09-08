@@ -20,8 +20,13 @@ public class Character : MonoBehaviour {
 
     string terrain = TerrainConstants.ROAD;
 
+    public float maxFuelAmount;
+    public float fuelAmount;
+
     void Start () {
         //animator = GetComponent<Animator>();
+        maxFuelAmount = 5000f;
+        fuelAmount = maxFuelAmount;
         body = GetComponent<Rigidbody2D>();
         body.drag = 1f;
         body.angularDrag = 2f;
@@ -48,11 +53,14 @@ public class Character : MonoBehaviour {
         xInput = Input.GetAxis("Horizontal");
         yInput = Input.GetAxis("Vertical");
 
+        bool acelerando = false;
+
         if (currentVelocity > 0)
         {
             if (yInput > 0)
             {
                 //Debug.Log("Acelerando");
+                acelerando = true;
                 currentVelocity += velocityIncreaseRate;
                 if(currentVelocity > maxVelocity)
                 {
@@ -101,6 +109,7 @@ public class Character : MonoBehaviour {
             else
             {
                 //Debug.Log("Acelerando para atras");
+                acelerando = true;
                 currentVelocity -= velocityIncreaseRate;
                 if(currentVelocity < -maxVelocity)
                 {
@@ -113,6 +122,7 @@ public class Character : MonoBehaviour {
             if (yInput > 0)
             {
                 //Debug.Log("Acelerando");
+                acelerando = true;
                 currentVelocity += velocityIncreaseRate;
                 if(currentVelocity > maxVelocity)
                 {
@@ -122,12 +132,17 @@ public class Character : MonoBehaviour {
             else if (yInput < 0)
             {
                 //Debug.Log("Acelerando para atras");
+                acelerando = true;
                 currentVelocity -= velocityIncreaseRate;
                 if(currentVelocity < -maxVelocity)
                 {
                     currentVelocity = -maxVelocity;
                 }
             }
+        }
+        if (acelerando)
+        {
+            fuelAmount = fuelAmount - 3;
         }
 
         // Ajustar la rotación del auto basado en la entrada horizontal
@@ -166,6 +181,16 @@ public class Character : MonoBehaviour {
         {
             currentVelocity = Mathf.Max(maxVelocity, currentVelocity / 1.5f);
         }
+    }
+
+    public float GetFuelAmount()
+    {
+        return fuelAmount;
+    }
+
+    public void FuelPickedUp()
+    {
+        fuelAmount = Mathf.Min(maxFuelAmount, fuelAmount + 500);
     }
 
 

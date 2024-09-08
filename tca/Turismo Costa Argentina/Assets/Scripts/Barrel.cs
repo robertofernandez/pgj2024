@@ -5,6 +5,8 @@ public class Barrel : MonoBehaviour
     bool setToDissapear = false;
     int ciclesToDissapear = 0;
     private SpriteRenderer spriteRenderer;
+
+    public CharactersManager characterManager;
     //private Collider2D collider2D;
     void Start () {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -30,15 +32,16 @@ public class Barrel : MonoBehaviour
         Debug.Log("algo colisiono: " + collision.gameObject.name);
         if (collision.gameObject.CompareTag("Player")) // Puedes cambiar "Player" por cualquier etiqueta que desees detectar
         {
-            Debug.Log("El jugador ha chocado.");
             /*
             spriteRenderer.enabled = false;
             collider2D.enabled = false;
             */
             if(!setToDissapear)
             {
+                Debug.Log("El jugador ha colectado combustible.");
                 ciclesToDissapear = 10;
                 setToDissapear = true;
+                characterManager.character.FuelPickedUp();
             }
         }
     }

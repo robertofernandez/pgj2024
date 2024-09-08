@@ -16,20 +16,20 @@ public class CharactersManager : MonoBehaviour {
 
     public int acceleration = 0;
 	
-	public int fuelUnits;
-	
 	public string status = "initialized";
 
     public float currentSpeed = 0;
+
+    public Character character;
 
 	void Start() 
     {
         Debug.Log("Characters Manager Started");
         //teamsMembersTransforms = new Transform[teamsAmount,charactersAmount];
         //characters = new Character[teamsAmount,charactersAmount];
-
         GameObject playerCar = instantiatePlayerCar(-5.15f, 6f);
         mainPlayerTransform = playerCar.transform;
+        character = playerCar.GetComponent<Character>();
     }
 
     public void playerCarExplosion()
