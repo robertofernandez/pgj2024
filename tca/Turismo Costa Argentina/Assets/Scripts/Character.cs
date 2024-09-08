@@ -142,7 +142,7 @@ public class Character : MonoBehaviour {
         }
         if (acelerando)
         {
-            fuelAmount = fuelAmount - 3;
+            fuelAmount = fuelAmount - 2;
         }
 
         // Ajustar la rotación del auto basado en la entrada horizontal

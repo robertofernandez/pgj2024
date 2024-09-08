@@ -28,6 +28,8 @@ public class MapTilesManager : MonoBehaviour {
     private Dictionary<string, GameObject> shoreTilesSetDictionary;
     private GameObject[] allTilesets;
     private GameObject[] shoreTilesets;
+    private List<GameObject> allDecoElements;
+    private List<GameObject> allDecoElementsRight;
 
     private GameObject[] baseSeaTilesets;
     private GameObject[] baseSeaTilesets2;
@@ -50,6 +52,21 @@ public class MapTilesManager : MonoBehaviour {
 
     private float tileSizeY = 21 * 1.5f;
 
+    public GameObject casa0;
+    public GameObject casa1;
+    public GameObject casa2;
+    public GameObject casa3;
+    public GameObject casa4;
+    public GameObject casa5;
+    public GameObject casa6;
+    public GameObject casa7;
+
+    public GameObject piedra;
+    public GameObject sombrilla_silla;
+
+    public GameObject arbol1;
+    public GameObject arbol2;
+
     private MapLogicManager mapLogicManager;
 
     public float mapFinalY = 1500;
@@ -64,6 +81,75 @@ public class MapTilesManager : MonoBehaviour {
 
     void Start() 
     {
+        allDecoElements = new List<GameObject>();
+        allDecoElements.Add(instantiateObject(casa0));
+        allDecoElements.Add(instantiateObject(arbol1));
+        allDecoElements.Add(instantiateObject(casa1));
+        allDecoElements.Add(instantiateObject(arbol2));
+        allDecoElements.Add(instantiateObject(casa2));
+        allDecoElements.Add(instantiateObject(arbol1));
+        allDecoElements.Add(instantiateObject(casa3));
+        allDecoElements.Add(instantiateObject(arbol2));
+        allDecoElements.Add(instantiateObject(casa4));
+        allDecoElements.Add(instantiateObject(arbol1));
+        allDecoElements.Add(instantiateObject(casa5));
+        allDecoElements.Add(instantiateObject(arbol2));
+        allDecoElements.Add(instantiateObject(casa6));
+        allDecoElements.Add(instantiateObject(arbol1));
+        allDecoElements.Add(instantiateObject(casa7));
+        allDecoElements.Add(instantiateObject(arbol2));
+        allDecoElements.Add(instantiateObject(casa0));
+        allDecoElements.Add(instantiateObject(arbol1));
+        allDecoElements.Add(instantiateObject(casa1));
+        allDecoElements.Add(instantiateObject(arbol2));
+        allDecoElements.Add(instantiateObject(casa2));
+        allDecoElements.Add(instantiateObject(arbol1));
+        allDecoElements.Add(instantiateObject(casa3));
+        allDecoElements.Add(instantiateObject(arbol2));
+        allDecoElements.Add(instantiateObject(casa4));
+        allDecoElements.Add(instantiateObject(arbol1));
+        allDecoElements.Add(instantiateObject(casa5));
+        allDecoElements.Add(instantiateObject(arbol2));
+        allDecoElements.Add(instantiateObject(casa6));
+        allDecoElements.Add(instantiateObject(arbol1));
+        allDecoElements.Add(instantiateObject(casa7));
+        allDecoElements.Add(instantiateObject(arbol2));
+        allDecoElements.Add(instantiateObject(casa0));
+        allDecoElements.Add(instantiateObject(arbol1));
+        allDecoElements.Add(instantiateObject(casa1));
+        allDecoElements.Add(instantiateObject(arbol2));
+        allDecoElements.Add(instantiateObject(casa2));
+        allDecoElements.Add(instantiateObject(arbol1));
+        allDecoElements.Add(instantiateObject(casa3));
+        allDecoElements.Add(instantiateObject(arbol2));
+        allDecoElements.Add(instantiateObject(casa4));
+        allDecoElements.Add(instantiateObject(arbol1));
+        allDecoElements.Add(instantiateObject(casa5));
+        allDecoElements.Add(instantiateObject(arbol2));
+        allDecoElements.Add(instantiateObject(casa6));
+        allDecoElements.Add(instantiateObject(arbol1));
+        allDecoElements.Add(instantiateObject(casa7));
+        allDecoElements.Add(instantiateObject(arbol2));
+
+        allDecoElementsRight = new List<GameObject>();
+
+        for(int dre = 0; dre < 20;dre++)
+        {
+            allDecoElementsRight.Add(instantiateObject(piedra));
+            allDecoElementsRight.Add(instantiateObject(piedra));
+            allDecoElementsRight.Add(instantiateObject(sombrilla_silla));
+            allDecoElementsRight.Add(instantiateObject(piedra));
+            allDecoElementsRight.Add(instantiateObject(piedra));
+            allDecoElementsRight.Add(instantiateObject(arbol1));
+            allDecoElementsRight.Add(instantiateObject(piedra));
+            allDecoElementsRight.Add(instantiateObject(piedra));
+            allDecoElementsRight.Add(instantiateObject(arbol2));
+            allDecoElementsRight.Add(instantiateObject(piedra));
+        }
+
+        initializeGenericDecoPositions(allDecoElements, -15, 0, 2);
+        initializeGenericDecoPositions(allDecoElementsRight, 2, 0, 1);
+
         float initialX = -22f;
         float initialY = -21f * 1.5f;
 
@@ -152,7 +238,6 @@ public class MapTilesManager : MonoBehaviour {
             barrel = barrelObject.GetComponent<Barrel>();
             barrel.characterManager = charactersManager;
             barrel.transform.position = new Vector3(-5.5f, tilesetDescriptor.CenterY + 2.5f, 0.2f);
-
         }
 
         allTilesets = new GameObject[8];
@@ -464,5 +549,18 @@ public class MapTilesManager : MonoBehaviour {
     {
         return instantiateObject(shoreTile_5_2);
     }
+
+    public void initializeGenericDecoPositions(List<GameObject> elements, float initialX, float initialY, float rangeX)
+    {
+        float currentY = initialY;
+        foreach(GameObject element in elements)
+        {
+            Vector3 position = element.transform.position;
+            currentY = currentY + Random.Range(2, 6);
+            float newX = initialX + Random.Range(-1 * rangeX, rangeX);
+            element.transform.position = new Vector3(newX, currentY, position.z);
+        }
+    }
+
 
 }
