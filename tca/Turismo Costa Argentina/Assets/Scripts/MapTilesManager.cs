@@ -50,6 +50,8 @@ public class MapTilesManager : MonoBehaviour {
 
     private MapLogicManager mapLogicManager;
 
+    public float mapFinalY = 1500;
+
     public MapTilesManager()
     {
         tilesDictionary = new Dictionary<string,GameObject>();
@@ -66,8 +68,9 @@ public class MapTilesManager : MonoBehaviour {
         //TODO make configurable
         int totalTilesSetInMap = 50;
 
-        //float finalY = 1400f;
-        float finalY = 400f;
+        float finalY = 1400f;
+        mapFinalY = finalY;
+        //float finalY = 400f;
 
         charactersManager = charactersManagerGameObject.GetComponent<CharactersManager>();
 
@@ -124,6 +127,8 @@ public class MapTilesManager : MonoBehaviour {
         //finishLine.transform.position = new Vector3(finalTilesetDescriptor.CenterX, finalTilesetDescriptor.CenterY, 0.2f);
         //FIXME: CHECK WHY
         finishLine.transform.position = new Vector3(-6.24f, finalTilesetDescriptor.CenterY, 0.2f);
+
+        mapFinalY = finalTilesetDescriptor.CenterY;
 
         allTilesets = new GameObject[8];
 
