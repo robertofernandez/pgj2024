@@ -146,7 +146,7 @@ public class Character : MonoBehaviour {
             fuelAmount = fuelAmount - 2;
             if(fuelAmount < 1)
             {
-                QuitGame();
+                GameOver();
             }
         }
 
@@ -198,10 +198,10 @@ public class Character : MonoBehaviour {
         fuelAmount = Mathf.Min(maxFuelAmount, fuelAmount + 500);
     }
 
-    public void QuitGame()
+    public void GameOver()
     {
-        Debug.Log("Quitting game");
-        Application.Quit();
+        Debug.Log("Game Over");
+        SceneManager.LoadScene(3);
     }
 
 }
