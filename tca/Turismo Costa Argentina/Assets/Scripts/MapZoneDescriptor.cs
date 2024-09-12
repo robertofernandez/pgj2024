@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public abstract class MapZoneDescriptor
 {
     public static string SINGLE_ROAD = "Single Road";
@@ -17,5 +19,5 @@ public abstract class MapZoneDescriptor
         TypeName = typeName;
     }
 
-    //public abstract string TypeName();
+    public abstract Vector2 GeometricCenter();
 }
