@@ -1112,6 +1112,7 @@ MonoBehaviour:
   diagonal2x2RoadTile: {fileID: 2060762965287649464, guid: 191d00b86a1fced4899d9a277664961a, type: 3}
   roadTilesetPrototype: {fileID: 1897189861330320586, guid: a4598285e63b3f44ea262307bf902563, type: 3}
   locationMarkPrototype: {fileID: 8228061396316656294, guid: 6fd78b5832013c746ada7a839f156b42, type: 3}
+  dotMarkerPrototype: {fileID: 7803330702596879097, guid: 2f35c39b80ded2d49a417e7d34d82e8b, type: 3}
   shoreTile_1_4: {fileID: 117898800902664299, guid: 857d0227cc6a85545a779c955c4ce3c6, type: 3}
   shoreTile_4_1: {fileID: 7937127410016741718, guid: 2ec89bd395dd9f84c94166881aca483f, type: 3}
   shoreTile_2_3: {fileID: 2780192892238254090, guid: 5dfc7a9ee3b96a74ba3dba636a82a174, type: 3}

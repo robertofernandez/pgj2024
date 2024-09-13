@@ -12,7 +12,7 @@ public class MapTilesManager : MonoBehaviour {
     public GameObject diagonal2x2RoadTile;
     public GameObject roadTilesetPrototype;
     public GameObject locationMarkPrototype;
-
+    public GameObject dotMarkerPrototype;
 
     public GameObject shoreTile_1_4;
     public GameObject shoreTile_4_1;
@@ -34,7 +34,7 @@ public class MapTilesManager : MonoBehaviour {
     private List<GameObject> allDecoElementsRight;
 
     private GameObject[] locationMarks;
-
+    private GameObject[] dotMarkers;
 
     private GameObject[] baseSeaTilesets;
     private GameObject[] baseSeaTilesets2;
@@ -79,6 +79,8 @@ public class MapTilesManager : MonoBehaviour {
     public float mapFinalY = 1500;
 
     int locationMarksNumber = 20;
+    int dotMarkersNumber = 100;
+
 
     public MapTilesManager()
     {
@@ -348,14 +350,36 @@ public class MapTilesManager : MonoBehaviour {
             locationMarks[i] = instantiateObject(locationMarkPrototype);
         }
 
-        int j = 0;
+        dotMarkers = new GameObject[dotMarkersNumber];
 
+        for(int i=0;i<dotMarkersNumber;i++)
+        {
+            dotMarkers[i] = instantiateObject(dotMarkerPrototype);
+        }
+
+        int j = 0;
+        int k = 0;
+
+
+        string printedDirection = DirectionConstants.SUR_NORTE;
         for(int i=0; i<10;i++)
         {
-            MapZoneDescriptor descriptor = mapLogicManager.GetDescriptorAt(i);
+            RoadMapZoneDescriptor descriptor = (RoadMapZoneDescriptor)mapLogicManager.GetDescriptorAt(i);
             if(j<locationMarksNumber)
             {
                 locationMarks[j++].transform.position = new Vector3(descriptor.GeometricCenter().x, descriptor.GeometricCenter().y, locationMarks[0].transform.position.z);
+
+                foreach (Vector2 point in descriptor.GetSignificantPointsInRoad(printedDirection))
+                {
+                    dotMarkers[k++].transform.position = new Vector3(point.x , point.y, locationMarks[0].transform.position.z);
+                }
+
+                /*
+                dotMarkers[k++].transform.position = new Vector3(descriptor.BottomLeft().x , descriptor.BottomLeft().y, locationMarks[0].transform.position.z);
+                dotMarkers[k++].transform.position = new Vector3(descriptor.TopLeft().x , descriptor.TopLeft().y, locationMarks[0].transform.position.z);
+                dotMarkers[k++].transform.position = new Vector3(descriptor.BottomRight().x , descriptor.BottomRight().y, locationMarks[0].transform.position.z);
+                dotMarkers[k++].transform.position = new Vector3(descriptor.TopRight().x , descriptor.TopRight().y, locationMarks[0].transform.position.z);
+                */
             }
         }
     }

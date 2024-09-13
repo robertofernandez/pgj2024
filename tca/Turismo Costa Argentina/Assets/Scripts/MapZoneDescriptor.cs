@@ -20,4 +20,9 @@ public abstract class MapZoneDescriptor
     }
 
     public abstract Vector2 GeometricCenter();
+    public abstract Vector2 BottomLeft();
+    public abstract Vector2 BottomRight();
+    public abstract Vector2 TopLeft();
+    public abstract Vector2 TopRight();
+
 }

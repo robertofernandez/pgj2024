@@ -1,4 +1,6 @@
 using UnityEngine;
+using System;
+using System.Collections.Generic;
 
 public static class MathUtils
 {
@@ -63,5 +65,32 @@ public static class MathUtils
             flippedY++;
         }
         return new Vector2Int(flippedX, flippedY);
+    }
+
+    public static List<Vector2> GeneratePointsOnArc(Vector2 center, float radius, float startAngle, float endAngle, int numberOfPoints)
+    {
+        float startRad = DegreesToRadians(startAngle);
+        float endRad = DegreesToRadians(endAngle);
+
+        float angleStep = (endRad - startRad) / (numberOfPoints - 1);
+
+        List<Vector2> points = new List<Vector2>();
+
+        for (int i = 0; i < numberOfPoints; i++)
+        {
+            float currentAngle = startRad + i * angleStep;
+
+            float x = center.x + radius * (float)Math.Cos(currentAngle);
+            float y = center.y + radius * (float)Math.Sin(currentAngle);
+
+            points.Add(new Vector2(x, y));
+        }
+
+        return points;
+    }
+
+    private static float DegreesToRadians(float degrees)
+    {
+        return degrees * (float)(Math.PI / 180);
     }
 }
