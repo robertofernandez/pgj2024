@@ -201,7 +201,14 @@ public class Character : MonoBehaviour {
     public void GameOver()
     {
         Debug.Log("Game Over");
-        SceneManager.LoadScene(3);
+        if(SceneManager.sceneCount > 1)
+        {
+            SceneManager.LoadScene(3);
+        }
+        else
+        {
+            Debug.Log("Not changing scene (debug mode");
+        }
     }
 
 }

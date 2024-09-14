@@ -360,9 +360,8 @@ public class MapTilesManager : MonoBehaviour {
         int j = 0;
         int k = 0;
 
-
-        //string printedDirection = DirectionConstants.SUR_NORTE;
-        string printedDirection = DirectionConstants.NORTE_SUR;
+        string printedDirection = DirectionConstants.SUR_NORTE;
+        //string printedDirection = DirectionConstants.NORTE_SUR;
         for(int i=0; i<10;i++)
         {
             RoadMapZoneDescriptor descriptor = (RoadMapZoneDescriptor)mapLogicManager.GetDescriptorAt(i);
@@ -449,6 +448,10 @@ public class MapTilesManager : MonoBehaviour {
         return output;
     }
 
+    /**
+     * TODO: combine visual and logic creators / initializations
+     * Road type 02
+     */
     public GameObject createSingleCurveStraightTileset()
     {
         GameObject output = instantiateRoadTileset();
@@ -466,6 +469,10 @@ public class MapTilesManager : MonoBehaviour {
         return output;
     }
 
+    /**
+     * TODO: combine visual and logic creators / initializations
+     * Road type 03
+     */
     public GameObject createSingleLeftCurveStraightTileset()
     {
         GameObject output = instantiateRoadTileset();
