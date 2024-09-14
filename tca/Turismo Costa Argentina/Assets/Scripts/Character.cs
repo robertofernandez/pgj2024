@@ -155,7 +155,7 @@ public class Character : MonoBehaviour {
         float realVelocity = body.velocity.magnitude;
         manager.SetCurrentSpeed(realVelocity);
 
-        Debug.Log("real velocity: " + realVelocity);
+        //Debug.Log("real velocity: " + realVelocity);
         if(currentVelocity < 0) {
             realVelocity = -1 * realVelocity;
         }

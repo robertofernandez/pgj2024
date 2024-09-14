@@ -13,6 +13,7 @@ public class MapTilesManager : MonoBehaviour {
     public GameObject roadTilesetPrototype;
     public GameObject locationMarkPrototype;
     public GameObject dotMarkerPrototype;
+    public GameObject testIceCreamsPrototye;
 
     public GameObject shoreTile_1_4;
     public GameObject shoreTile_4_1;
@@ -35,6 +36,7 @@ public class MapTilesManager : MonoBehaviour {
 
     private GameObject[] locationMarks;
     private GameObject[] dotMarkers;
+    private GameObject[] testIceCreams;
 
     private GameObject[] baseSeaTilesets;
     private GameObject[] baseSeaTilesets2;
@@ -351,17 +353,21 @@ public class MapTilesManager : MonoBehaviour {
         }
 
         dotMarkers = new GameObject[dotMarkersNumber];
+        testIceCreams = new GameObject[dotMarkersNumber];
 
         for(int i=0;i<dotMarkersNumber;i++)
         {
             dotMarkers[i] = instantiateObject(dotMarkerPrototype);
+            testIceCreams[i] = instantiateObject(testIceCreamsPrototye);
         }
 
         int j = 0;
         int k = 0;
+        int m = 0;
 
-        string printedDirection = DirectionConstants.SUR_NORTE;
+        //string printedDirection = DirectionConstants.SUR_NORTE;
         //string printedDirection = DirectionConstants.NORTE_SUR;
+
         for(int i=0; i<10;i++)
         {
             RoadMapZoneDescriptor descriptor = (RoadMapZoneDescriptor)mapLogicManager.GetDescriptorAt(i);
@@ -369,9 +375,13 @@ public class MapTilesManager : MonoBehaviour {
             {
                 locationMarks[j++].transform.position = new Vector3(descriptor.GeometricCenter().x, descriptor.GeometricCenter().y, locationMarks[0].transform.position.z);
 
-                foreach (Vector2 point in descriptor.GetSignificantPointsInRoad(printedDirection))
+                foreach (Vector2 point in descriptor.GetSignificantPointsInRoad(DirectionConstants.SUR_NORTE))
                 {
                     dotMarkers[k++].transform.position = new Vector3(point.x , point.y, locationMarks[0].transform.position.z);
+                }
+                foreach (Vector2 point in descriptor.GetSignificantPointsInRoad(DirectionConstants.NORTE_SUR))
+                {
+                    testIceCreams[m++].transform.position = new Vector3(point.x , point.y, testIceCreams[0].transform.position.z);
                 }
 
                 /*

@@ -35,7 +35,7 @@ public class RoadCollisionHandler : MonoBehaviour
         {
             Character character = other.GetComponent<Character>();
             character.SetRoadSpeed();
-            Debug.Log(character.GetUnitName() + " está dentro de la calzada.");
+            //Debug.Log(character.GetUnitName() + " está dentro de la calzada.");
             // Agrega la lógica que se ejecuta mientras el jugador esté dentro del trigger
         }
     }
@@ -47,7 +47,7 @@ public class RoadCollisionHandler : MonoBehaviour
         {
             Character character = other.GetComponent<Character>();
             character.SetSandSpeed();
-            Debug.Log(character.GetUnitName() + " está fuera de la calzada.");
+            //Debug.Log(character.GetUnitName() + " está fuera de la calzada.");
         }
     }
 }
