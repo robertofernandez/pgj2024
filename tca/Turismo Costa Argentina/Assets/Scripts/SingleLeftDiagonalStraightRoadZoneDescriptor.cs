@@ -16,23 +16,26 @@ public class SingleLeftDiagonalStraightRoadZoneDescriptor : RoadMapZoneDescripto
         Dictionary<string, List<Vector2>> output = new Dictionary<string, List<Vector2>>();
         List<Vector2> southNorth = new List<Vector2>();
         southNorth.Add(calculator.GetTileCoordinatesHalfTileRight(RectangleAnchorValues.BOTTOM, RectangleAnchorValues.MIDDLE, 4, 0));
+		Vector2 currentCurveCoordinates = calculator.GetTileCoordinatesHalfTileRight(RectangleAnchorValues.BOTTOM, RectangleAnchorValues.MIDDLE, 4, 3);
+        southNorth.Add(currentCurveCoordinates);
+		currentCurveCoordinates = currentCurveCoordinates + new Vector2(-1 * SubtilesSize / 20f, SubtilesSize / 4f);
+        southNorth.Add(currentCurveCoordinates);
+		currentCurveCoordinates = currentCurveCoordinates + new Vector2(-1 * SubtilesSize / 15f, SubtilesSize / 4f);
+        southNorth.Add(currentCurveCoordinates);
+		currentCurveCoordinates = currentCurveCoordinates + new Vector2(-1 * SubtilesSize / 10f, SubtilesSize / 4f);
+        southNorth.Add(currentCurveCoordinates);
+		currentCurveCoordinates = currentCurveCoordinates + new Vector2(-1 * SubtilesSize / 5f, SubtilesSize / 4f);
+        southNorth.Add(currentCurveCoordinates);
 
-        Debug.Log("Descriptor for left diagonal at " + CenterX + ", " + CenterY);
-        Debug.Log("Geometric center:  " + GeometricCenter().x + ", " + GeometricCenter().y);
-        Debug.Log("Expected:  " + GeometricCenter().x + ", " + CenterY);
-        Vector2 temp = calculator.GetTileCoordinatesHalfTileRight(RectangleAnchorValues.BOTTOM, RectangleAnchorValues.MIDDLE, 4, 0);
-        Debug.Log("Got:  " + temp.x + ", " + temp.y);
+		currentCurveCoordinates = currentCurveCoordinates + new Vector2(-1 * SubtilesSize / 3f, SubtilesSize / 4f);
+        southNorth.Add(currentCurveCoordinates);
+		currentCurveCoordinates = currentCurveCoordinates + new Vector2(-1 * SubtilesSize / 5f, SubtilesSize / 4f);
+        southNorth.Add(currentCurveCoordinates);
+		currentCurveCoordinates = currentCurveCoordinates + new Vector2(-1 * SubtilesSize / 15f, SubtilesSize / 4f);
+        southNorth.Add(currentCurveCoordinates);
+		currentCurveCoordinates = currentCurveCoordinates + new Vector2(-1 * SubtilesSize / 20f, SubtilesSize / 4f);
+        southNorth.Add(currentCurveCoordinates);
 
-        List<Vector2> externalArc = MathUtils.GeneratePointsOnArc(calculator.GetTileCoordinates(RectangleAnchorValues.TOP, RectangleAnchorValues.LEFT, 4, 2), SubtilesSize * 3/ 4, 0, 90, 4);
-                foreach(Vector2 point in externalArc)
-        {
-            southNorth.Add(point);
-        }
-        List<Vector2> internalArc = MathUtils.GeneratePointsOnArc(calculator.GetTileCoordinates(RectangleAnchorValues.TOP, RectangleAnchorValues.LEFT, 4, 3), SubtilesSize * 1 / 4, 270, 180, 4);
-        foreach(Vector2 point in internalArc)
-        {
-            southNorth.Add(point);
-        }
         southNorth.Add(calculator.GetTileCoordinatesHalfTileRight(RectangleAnchorValues.TOP, RectangleAnchorValues.MIDDLE, 3, 7));
         output[DirectionConstants.SUR_NORTE] = southNorth;
 
@@ -40,18 +43,28 @@ public class SingleLeftDiagonalStraightRoadZoneDescriptor : RoadMapZoneDescripto
 
         List<Vector2> northSouth = new List<Vector2>();
         northSouth.Add(calculator.GetTileCoordinatesHalfTileLeft(RectangleAnchorValues.TOP, RectangleAnchorValues.MIDDLE, 3, 7));
+		
+		
+		currentCurveCoordinates = calculator.GetTileCoordinatesHalfTileLeft(RectangleAnchorValues.TOP, RectangleAnchorValues.MIDDLE, 3, 4);
+        northSouth.Add(currentCurveCoordinates);
+		currentCurveCoordinates = currentCurveCoordinates + new Vector2(1 * SubtilesSize / 20f, -1 * SubtilesSize / 4f);
+        northSouth.Add(currentCurveCoordinates);
+		currentCurveCoordinates = currentCurveCoordinates + new Vector2(1 * SubtilesSize / 15f, -1 * SubtilesSize / 4f);
+        northSouth.Add(currentCurveCoordinates);
+		currentCurveCoordinates = currentCurveCoordinates + new Vector2(1 * SubtilesSize / 5f, -1 * SubtilesSize / 4f);
+        northSouth.Add(currentCurveCoordinates);
+		currentCurveCoordinates = currentCurveCoordinates + new Vector2(1 * SubtilesSize / 3f, -1 * SubtilesSize / 4f);
+        northSouth.Add(currentCurveCoordinates);
 
-        externalArc = MathUtils.GeneratePointsOnArc(calculator.GetTileCoordinates(RectangleAnchorValues.TOP, RectangleAnchorValues.LEFT, 4, 3), SubtilesSize * 3/ 4, 180, 270, 4);
-        foreach(Vector2 point in externalArc)
-        {
-            northSouth.Add(point);
-        }
-        internalArc = MathUtils.GeneratePointsOnArc(calculator.GetTileCoordinates(RectangleAnchorValues.TOP, RectangleAnchorValues.LEFT, 4, 2), SubtilesSize * 1 / 4, 90, 0, 4);
-        foreach(Vector2 point in internalArc)
-        {
-            northSouth.Add(point);
-        }
-
+		currentCurveCoordinates = currentCurveCoordinates + new Vector2(1 * SubtilesSize / 4f, -1 * SubtilesSize / 4f);
+        northSouth.Add(currentCurveCoordinates);
+		currentCurveCoordinates = currentCurveCoordinates + new Vector2(1 * SubtilesSize / 15f, -1 * SubtilesSize / 4f);
+        northSouth.Add(currentCurveCoordinates);
+		currentCurveCoordinates = currentCurveCoordinates + new Vector2(1 * SubtilesSize / 20f, -1 * SubtilesSize / 4f);
+        northSouth.Add(currentCurveCoordinates);
+		currentCurveCoordinates = currentCurveCoordinates + new Vector2(1 * SubtilesSize / 20f, -1 * SubtilesSize / 4f);
+        northSouth.Add(currentCurveCoordinates);
+		
         northSouth.Add(calculator.GetTileCoordinatesHalfTileLeft(RectangleAnchorValues.BOTTOM, RectangleAnchorValues.MIDDLE, 4, 0));
         output[DirectionConstants.NORTE_SUR] = northSouth;
 
