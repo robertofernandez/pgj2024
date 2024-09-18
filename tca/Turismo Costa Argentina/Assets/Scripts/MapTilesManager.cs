@@ -197,7 +197,7 @@ public class MapTilesManager : MonoBehaviour {
         roadTilesSetDictionary["single curve straight road"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
         mapLogicManager.AddOrderedDescriptor(initialY, new SingleRightCurveStraightRoadZoneDescriptor(initialX, initialY, roadSubtiles, roadTileSizeX));
         roadTilesSetDictionary["single left diagonal straight road"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
-        mapLogicManager.AddOrderedDescriptor(initialY, new SingleLeftCurveStraightRoadZoneDescriptor(initialX, initialY, roadSubtiles, roadTileSizeX));
+        mapLogicManager.AddOrderedDescriptor(initialY, new SingleLeftDiagonalStraightRoadZoneDescriptor(initialX, initialY, roadSubtiles, roadTileSizeX));
         roadTilesSetDictionary["basic straight road2"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
         mapLogicManager.AddOrderedDescriptor(initialY, new SingleRoadZoneDescriptor(initialX, initialY, roadSubtiles, roadTileSizeX));
         roadTilesSetDictionary["single diagonal straight road"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);

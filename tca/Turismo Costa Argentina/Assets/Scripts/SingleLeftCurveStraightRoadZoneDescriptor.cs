@@ -21,12 +21,11 @@ public class SingleLeftCurveStraightRoadZoneDescriptor : RoadMapZoneDescriptor
         List<Vector2> southNorth = new List<Vector2>();
         southNorth.Add(calculator.GetTileCoordinatesHalfTileRight(RectangleAnchorValues.BOTTOM, RectangleAnchorValues.MIDDLE, 4, 0));
 
-        Debug.Log("Descriptor for left curve at " + CenterX + ", " + CenterY);
-        Debug.Log("Geometric center:  " + GeometricCenter().x + ", " + GeometricCenter().y);
-        Debug.Log("Expected:  " + GeometricCenter().x + ", " + CenterY);
-        Vector2 temp = calculator.GetTileCoordinates(RectangleAnchorValues.BOTTOM, RectangleAnchorValues.MIDDLE, 4, 0);
-        Debug.Log("Got:  " + temp.x + ", " + temp.y);
-
+        //Debug.Log("Descriptor for left curve at " + CenterX + ", " + CenterY);
+        //Debug.Log("Geometric center:  " + GeometricCenter().x + ", " + GeometricCenter().y);
+        //Debug.Log("Expected:  " + GeometricCenter().x + ", " + CenterY);
+        //Vector2 temp = calculator.GetTileCoordinates(RectangleAnchorValues.BOTTOM, RectangleAnchorValues.MIDDLE, 4, 0);
+        //Debug.Log("Got:  " + temp.x + ", " + temp.y);
         //DebugVectors(southNorth);
 
         List<Vector2> externalArc = MathUtils.GeneratePointsOnArc(calculator.GetTileCoordinates(RectangleAnchorValues.TOP, RectangleAnchorValues.LEFT, 4, 2), SubtilesSize * 3/ 4, 0, 90, 4);
@@ -39,13 +38,13 @@ public class SingleLeftCurveStraightRoadZoneDescriptor : RoadMapZoneDescriptor
         {
             southNorth.Add(point);
         }
-        southNorth.Add(calculator.GetTileCoordinatesHalfTileRight(RectangleAnchorValues.TOP, RectangleAnchorValues.MIDDLE, 3, 0));
+        southNorth.Add(calculator.GetTileCoordinatesHalfTileRight(RectangleAnchorValues.TOP, RectangleAnchorValues.MIDDLE, 3, 7));
         output[DirectionConstants.SUR_NORTE] = southNorth;
 
         //==============
 
         List<Vector2> northSouth = new List<Vector2>();
-        northSouth.Add(calculator.GetTileCoordinatesHalfTileLeft(RectangleAnchorValues.TOP, RectangleAnchorValues.MIDDLE, 3, 0));
+        northSouth.Add(calculator.GetTileCoordinatesHalfTileLeft(RectangleAnchorValues.TOP, RectangleAnchorValues.MIDDLE, 3, 7));
 
         externalArc = MathUtils.GeneratePointsOnArc(calculator.GetTileCoordinates(RectangleAnchorValues.TOP, RectangleAnchorValues.LEFT, 4, 3), SubtilesSize * 3/ 4, 180, 270, 4);
         foreach(Vector2 point in externalArc)

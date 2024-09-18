@@ -33,7 +33,7 @@ public class SingleRightCurveStraightRoadZoneDescriptor : RoadMapZoneDescriptor
         //==============
 
         List<Vector2> northSouth = new List<Vector2>();
-        northSouth.Add(new Vector2(GeometricCenter().x + SubtilesSize * 5 / 4, TopLeft().y));
+        northSouth.Add(new Vector2(GeometricCenter().x + SubtilesSize * 3 / 4, TopLeft().y));
         internalArc = MathUtils.GeneratePointsOnArc(new Vector2(GeometricCenter().x + SubtilesSize * 1 / 2, TopLeft().y - SubtilesSize * 3f), SubtilesSize / 4, 0, -90, 4);
         foreach(Vector2 point in internalArc)
         {
