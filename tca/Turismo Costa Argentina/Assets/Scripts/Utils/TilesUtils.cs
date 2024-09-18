@@ -5,25 +5,32 @@ namespace Sodhium.Utils
 {
     public static class TilesUtils
     {
-        public static TilesetCoordinatesCalculator GetTilesetCoordinatesCalculator(float centerX, float centerY, float tilesX, float tilesY, float tileSizeX, float tileSizeY)
+        public static TilesetCoordinatesCalculator GetTilesetCoordinatesCalculatorFromCenter(float centerX, float centerY, float tilesX, float tilesY, float tileSizeX, float tileSizeY)
         {
-            return new TilesetCoordinatesCalculator(centerX, centerY, tilesX, tilesY, tileSizeX, tileSizeY);
+            float leftLimit = centerX - (tileSizeX * tilesX / 2);
+            float bottomLimit = centerY - (tileSizeY * tilesY / 2);
+            return new TilesetCoordinatesCalculator(leftLimit, bottomLimit, tilesX, tilesY, tileSizeX, tileSizeY);
+        }
+
+        public static TilesetCoordinatesCalculator GetTilesetCoordinatesCalculator(float leftLimit, float bottomLimit, float tilesX, float tilesY, float tileSizeX, float tileSizeY)
+        {
+            return new TilesetCoordinatesCalculator(leftLimit, bottomLimit, tilesX, tilesY, tileSizeX, tileSizeY);
         }
     }
 
     public class TilesetCoordinatesCalculator
     {
-        private float centerX;
-        private float centerY;
+        private float leftLimit;
+        private float bottomLimit;
         private float tilesX;
         private float tilesY;
         private float tileSizeX;
         private float tileSizeY;
 
-        public TilesetCoordinatesCalculator(float centerX, float centerY, float tilesX, float tilesY, float tileSizeX, float tileSizeY)
+        public TilesetCoordinatesCalculator(float leftLimit, float bottomLimit, float tilesX, float tilesY, float tileSizeX, float tileSizeY)
         {
-            this.centerX = centerX;
-            this.centerY = centerY;
+            this.leftLimit = leftLimit;
+            this.bottomLimit = bottomLimit;
             this.tilesX = tilesX;
             this.tilesY = tilesY;
             this.tileSizeX = tileSizeX;
@@ -32,34 +39,34 @@ namespace Sodhium.Utils
 
         public Vector2 GetTileCenterCoordinates(int tileX, int tileY)
         {
-            float offsetX = ((float)tileX - tilesX) * tileSizeX;
-            float offsetY = ((float)tileY - tilesY) * tileSizeY;
+            float offsetX = (float)tileX * tileSizeX + tileSizeX / 2;
+            float offsetY = (float)tileY * tileSizeY + tileSizeY / 2;
 
-            return new Vector2(centerX + offsetX, centerY + offsetY);
+            return new Vector2(leftLimit + offsetX, bottomLimit + offsetY);
         }
 
-        public Vector2 GetTileCoordinates(float anchorX, float anchorY, int tileX, int tileY)
+        public Vector2 GetTileCoordinates(float anchorY, float anchorX, int tileX, int tileY)
         {
-            float offsetX = ((float)tileX - tilesX / 2 + anchorX / 2) * tileSizeX;
-            float offsetY = ((float)tileY - tilesY / 2 + anchorY / 2) * tileSizeY;
+            float offsetX = (float)tileX * tileSizeX + tileSizeX / 2 + (anchorX) * tileSizeX / 2;
+            float offsetY = (float)tileY * tileSizeY + tileSizeY / 2 + (anchorY) * tileSizeY / 2;
 
-            return new Vector2(centerX + offsetX, centerY + offsetY);
+            return new Vector2(leftLimit + offsetX, bottomLimit + offsetY);
         }
 
-        public Vector2 GetTileCoordinatesHalfTileLeft(float anchorX, float anchorY, int tileX, int tileY)
+        public Vector2 GetTileCoordinatesHalfTileLeft(float anchorY, float anchorX, int tileX, int tileY)
         {
-            float offsetX = ((float)tileX - tilesX / 2 + anchorX / 2 - 1/4) * tileSizeX;
-            float offsetY = ((float)tileY - tilesY / 2 + anchorY / 2) * tileSizeY;
+            float offsetX = (float)tileX * tileSizeX + tileSizeX / 2 + (anchorX) * tileSizeX / 2 - tileSizeX / 4;
+            float offsetY = (float)tileY * tileSizeY + tileSizeY / 2 + (anchorY) * tileSizeY / 2;
 
-            return new Vector2(centerX + offsetX, centerY + offsetY);
+            return new Vector2(leftLimit + offsetX, bottomLimit + offsetY);
         }
 
-        public Vector2 GetTileCoordinatesHalfTileRight(float anchorX, float anchorY, int tileX, int tileY)
+        public Vector2 GetTileCoordinatesHalfTileRight(float anchorY, float anchorX, int tileX, int tileY)
         {
-            float offsetX = ((float)tileX - tilesX / 2 + anchorX / 2 - 1/4) * tileSizeX;
-            float offsetY = ((float)tileY - tilesY / 2 + anchorY / 2) * tileSizeY;
+            float offsetX = (float)tileX * tileSizeX + tileSizeX / 2 + (anchorX) * tileSizeX / 2 + tileSizeX / 4;
+            float offsetY = (float)tileY * tileSizeY + tileSizeY / 2 + (anchorY) * tileSizeY / 2;
 
-            return new Vector2(centerX + offsetX, centerY + offsetY);
+            return new Vector2(leftLimit + offsetX, bottomLimit + offsetY);
         }
 
     }

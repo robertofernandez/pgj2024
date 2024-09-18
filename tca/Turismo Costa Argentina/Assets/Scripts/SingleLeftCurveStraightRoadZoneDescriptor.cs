@@ -16,20 +16,25 @@ public class SingleLeftCurveStraightRoadZoneDescriptor : RoadMapZoneDescriptor
 
     public override Dictionary<string, List<Vector2>> GenerateSignificantPointsByDirection()
     {
-        TilesetCoordinatesCalculator calculator = TilesUtils.GetTilesetCoordinatesCalculator(GeometricCenter().x, GeometricCenter().y, SubtilesAmount, SubtilesAmount, SubtilesSize, SubtilesSize);
+        TilesetCoordinatesCalculator calculator = TilesUtils.GetTilesetCoordinatesCalculator(CenterX, CenterY, SubtilesAmount, SubtilesAmount, SubtilesSize, SubtilesSize);
         Dictionary<string, List<Vector2>> output = new Dictionary<string, List<Vector2>>();
         List<Vector2> southNorth = new List<Vector2>();
         southNorth.Add(calculator.GetTileCoordinatesHalfTileRight(RectangleAnchorValues.BOTTOM, RectangleAnchorValues.MIDDLE, 4, 0));
 
         Debug.Log("Descriptor for left curve at " + CenterX + ", " + CenterY);
-        DebugVectors(southNorth);
+        Debug.Log("Geometric center:  " + GeometricCenter().x + ", " + GeometricCenter().y);
+        Debug.Log("Expected:  " + GeometricCenter().x + ", " + CenterY);
+        Vector2 temp = calculator.GetTileCoordinates(RectangleAnchorValues.BOTTOM, RectangleAnchorValues.MIDDLE, 4, 0);
+        Debug.Log("Got:  " + temp.x + ", " + temp.y);
+
+        //DebugVectors(southNorth);
 
         List<Vector2> externalArc = MathUtils.GeneratePointsOnArc(calculator.GetTileCoordinates(RectangleAnchorValues.TOP, RectangleAnchorValues.LEFT, 4, 2), SubtilesSize * 3/ 4, 0, 90, 4);
-        foreach(Vector2 point in externalArc)
+                foreach(Vector2 point in externalArc)
         {
             southNorth.Add(point);
         }
-        List<Vector2> internalArc = MathUtils.GeneratePointsOnArc(calculator.GetTileCoordinates(RectangleAnchorValues.TOP, RectangleAnchorValues.LEFT, 4, 3), SubtilesSize * 1 / 4, 180, 90, 4);
+        List<Vector2> internalArc = MathUtils.GeneratePointsOnArc(calculator.GetTileCoordinates(RectangleAnchorValues.TOP, RectangleAnchorValues.LEFT, 4, 3), SubtilesSize * 1 / 4, 270, 180, 4);
         foreach(Vector2 point in internalArc)
         {
             southNorth.Add(point);
@@ -42,12 +47,12 @@ public class SingleLeftCurveStraightRoadZoneDescriptor : RoadMapZoneDescriptor
         List<Vector2> northSouth = new List<Vector2>();
         northSouth.Add(calculator.GetTileCoordinatesHalfTileLeft(RectangleAnchorValues.TOP, RectangleAnchorValues.MIDDLE, 3, 0));
 
-        externalArc = MathUtils.GeneratePointsOnArc(calculator.GetTileCoordinates(RectangleAnchorValues.BOTTOM, RectangleAnchorValues.RIGHT, 3, 2), SubtilesSize * 3/ 4, 180, 270, 4);
+        externalArc = MathUtils.GeneratePointsOnArc(calculator.GetTileCoordinates(RectangleAnchorValues.TOP, RectangleAnchorValues.LEFT, 4, 3), SubtilesSize * 3/ 4, 180, 270, 4);
         foreach(Vector2 point in externalArc)
         {
             northSouth.Add(point);
         }
-        internalArc = MathUtils.GeneratePointsOnArc(calculator.GetTileCoordinates(RectangleAnchorValues.BOTTOM, RectangleAnchorValues.RIGHT, 3, 2), SubtilesSize * 1 / 4, 90, 0, 4);
+        internalArc = MathUtils.GeneratePointsOnArc(calculator.GetTileCoordinates(RectangleAnchorValues.TOP, RectangleAnchorValues.LEFT, 4, 2), SubtilesSize * 1 / 4, 90, 0, 4);
         foreach(Vector2 point in internalArc)
         {
             northSouth.Add(point);
