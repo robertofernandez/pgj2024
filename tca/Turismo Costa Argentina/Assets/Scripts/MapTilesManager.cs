@@ -192,34 +192,53 @@ public class MapTilesManager : MonoBehaviour {
         roadTilesSetDictionary.Add("single diagonal straight road2", createSingleDiagonalTileset());
         roadTilesSetDictionary.Add("single left diagonal straight road2", createSingleLeftDiagonalTileset());
 
-        roadTilesSetDictionary["basic straight road"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
-        mapLogicManager.AddOrderedDescriptor(initialY, new SingleRoadZoneDescriptor(initialX, initialY, roadSubtiles, roadTileSizeX));
-        roadTilesSetDictionary["single curve straight road"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
-        mapLogicManager.AddOrderedDescriptor(initialY, new SingleRightCurveStraightRoadZoneDescriptor(initialX, initialY, roadSubtiles, roadTileSizeX));
-        roadTilesSetDictionary["single left diagonal straight road"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
-        mapLogicManager.AddOrderedDescriptor(initialY, new SingleLeftDiagonalStraightRoadZoneDescriptor(initialX, initialY, roadSubtiles, roadTileSizeX));
-        roadTilesSetDictionary["basic straight road2"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
-        mapLogicManager.AddOrderedDescriptor(initialY, new SingleRoadZoneDescriptor(initialX, initialY, roadSubtiles, roadTileSizeX));
-        roadTilesSetDictionary["single diagonal straight road"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
-        mapLogicManager.AddOrderedDescriptor(initialY, new SingleRightDiagonalStraightRoadZoneDescriptor(initialX, initialY, roadSubtiles, roadTileSizeX));
-        roadTilesSetDictionary["single left curve straight road"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
-        mapLogicManager.AddOrderedDescriptor(initialY, new SingleLeftCurveStraightRoadZoneDescriptor(initialX, initialY, roadSubtiles, roadTileSizeX));
-        roadTilesSetDictionary["single diagonal straight road2"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
-        mapLogicManager.AddOrderedDescriptor(initialY, new SingleRightDiagonalStraightRoadZoneDescriptor(initialX, initialY, roadSubtiles, roadTileSizeX));
-        roadTilesSetDictionary["single left diagonal straight road2"].transform.position = new Vector3(initialX, initialY+=tileSizeY, 0.2f);
-        mapLogicManager.AddOrderedDescriptor(initialY, new SingleLeftDiagonalStraightRoadZoneDescriptor(initialX, initialY, roadSubtiles, roadTileSizeX));
+		float currentY = initialY;
+
+        roadTilesSetDictionary["basic straight road"].transform.position = new Vector3(initialX, currentY, 0.2f);
+        mapLogicManager.AddOrderedDescriptor(currentY, new SingleRoadZoneDescriptor(initialX, currentY, roadSubtiles, roadTileSizeX));
+		currentY+=tileSizeY;
+        roadTilesSetDictionary["single curve straight road"].transform.position = new Vector3(initialX, currentY, 0.2f);
+        mapLogicManager.AddOrderedDescriptor(currentY, new SingleRightCurveStraightRoadZoneDescriptor(initialX, currentY, roadSubtiles, roadTileSizeX));
+		currentY+=tileSizeY;
+        roadTilesSetDictionary["single left diagonal straight road"].transform.position = new Vector3(initialX, currentY, 0.2f);
+        mapLogicManager.AddOrderedDescriptor(currentY, new SingleLeftDiagonalStraightRoadZoneDescriptor(initialX, currentY, roadSubtiles, roadTileSizeX));
+		currentY+=tileSizeY;
+        roadTilesSetDictionary["basic straight road2"].transform.position = new Vector3(initialX, currentY, 0.2f);
+        mapLogicManager.AddOrderedDescriptor(currentY, new SingleRoadZoneDescriptor(initialX, currentY, roadSubtiles, roadTileSizeX));
+		currentY+=tileSizeY;
+        roadTilesSetDictionary["single diagonal straight road"].transform.position = new Vector3(initialX, currentY, 0.2f);
+        mapLogicManager.AddOrderedDescriptor(currentY, new SingleRightDiagonalStraightRoadZoneDescriptor(initialX, currentY, roadSubtiles, roadTileSizeX));
+		currentY+=tileSizeY;
+        roadTilesSetDictionary["single left curve straight road"].transform.position = new Vector3(initialX, currentY, 0.2f);
+        mapLogicManager.AddOrderedDescriptor(currentY, new SingleLeftCurveStraightRoadZoneDescriptor(initialX, currentY, roadSubtiles, roadTileSizeX));
+		currentY+=tileSizeY;
+        roadTilesSetDictionary["single diagonal straight road2"].transform.position = new Vector3(initialX, currentY, 0.2f);
+        mapLogicManager.AddOrderedDescriptor(currentY, new SingleRightDiagonalStraightRoadZoneDescriptor(initialX, currentY, roadSubtiles, roadTileSizeX));
+		currentY+=tileSizeY;
+        roadTilesSetDictionary["single left diagonal straight road2"].transform.position = new Vector3(initialX, currentY, 0.2f);
+        mapLogicManager.AddOrderedDescriptor(currentY, new SingleLeftDiagonalStraightRoadZoneDescriptor(initialX, currentY, roadSubtiles, roadTileSizeX));
+		currentY+=tileSizeY;
 
         for(int k = 0; k < totalTilesSetInMap; k++)
         {
-            mapLogicManager.AddOrderedDescriptor(initialY, new SingleRoadZoneDescriptor(initialX, initialY+=tileSizeY, roadSubtiles, roadTileSizeX));
-            mapLogicManager.AddOrderedDescriptor(initialY, new SingleRightCurveStraightRoadZoneDescriptor(initialX, initialY+=tileSizeY, roadSubtiles, roadTileSizeX));
-            mapLogicManager.AddOrderedDescriptor(initialY, new SingleLeftCurveStraightRoadZoneDescriptor(initialX, initialY+=tileSizeY, roadSubtiles, roadTileSizeX));
-            mapLogicManager.AddOrderedDescriptor(initialY, new SingleRoadZoneDescriptor(initialX, initialY+=tileSizeY, roadSubtiles, roadTileSizeX));
-            mapLogicManager.AddOrderedDescriptor(initialY, new SingleRightDiagonalStraightRoadZoneDescriptor(initialX, initialY+=tileSizeY, roadSubtiles, roadTileSizeX));
-            mapLogicManager.AddOrderedDescriptor(initialY, new SingleLeftCurveStraightRoadZoneDescriptor(initialX, initialY+=tileSizeY, roadSubtiles, roadTileSizeX));
-            mapLogicManager.AddOrderedDescriptor(initialY, new SingleRightDiagonalStraightRoadZoneDescriptor(initialX, initialY+=tileSizeY, roadSubtiles, roadTileSizeX));
-            mapLogicManager.AddOrderedDescriptor(initialY, new SingleLeftDiagonalStraightRoadZoneDescriptor(initialX, initialY+=tileSizeY, roadSubtiles, roadTileSizeX));
+            mapLogicManager.AddOrderedDescriptor(currentY, new SingleRoadZoneDescriptor(initialX, currentY, roadSubtiles, roadTileSizeX));
+			currentY+=tileSizeY;
+            mapLogicManager.AddOrderedDescriptor(currentY, new SingleRightCurveStraightRoadZoneDescriptor(initialX, currentY, roadSubtiles, roadTileSizeX));
+			currentY+=tileSizeY;
+            mapLogicManager.AddOrderedDescriptor(currentY, new SingleLeftDiagonalStraightRoadZoneDescriptor(initialX, currentY, roadSubtiles, roadTileSizeX));
+			currentY+=tileSizeY;
+            mapLogicManager.AddOrderedDescriptor(currentY, new SingleRoadZoneDescriptor(initialX, currentY, roadSubtiles, roadTileSizeX));
+			currentY+=tileSizeY;
+            mapLogicManager.AddOrderedDescriptor(currentY, new SingleRightDiagonalStraightRoadZoneDescriptor(initialX, currentY, roadSubtiles, roadTileSizeX));
+			currentY+=tileSizeY;
+            mapLogicManager.AddOrderedDescriptor(currentY, new SingleLeftCurveStraightRoadZoneDescriptor(initialX, currentY, roadSubtiles, roadTileSizeX));
+			currentY+=tileSizeY;
+            mapLogicManager.AddOrderedDescriptor(currentY, new SingleRightDiagonalStraightRoadZoneDescriptor(initialX, currentY, roadSubtiles, roadTileSizeX));
+			currentY+=tileSizeY;
+            mapLogicManager.AddOrderedDescriptor(currentY, new SingleLeftDiagonalStraightRoadZoneDescriptor(initialX, currentY, roadSubtiles, roadTileSizeX));
+			currentY+=tileSizeY;
         }
+
         Debug.Log("Max index in map: " + mapLogicManager.GetMaxIndex());
         Debug.Log("Max y in map: " + mapLogicManager.GetMaxY());
 
