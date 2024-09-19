@@ -36,13 +36,13 @@ public class SingleLeftDiagonalStraightRoadZoneDescriptor : RoadMapZoneDescripto
 		currentCurveCoordinates = currentCurveCoordinates + new Vector2(-1 * SubtilesSize / 20f, SubtilesSize / 4f);
         southNorth.Add(currentCurveCoordinates);
 
-        southNorth.Add(calculator.GetTileCoordinatesHalfTileRight(RectangleAnchorValues.TOP, RectangleAnchorValues.MIDDLE, 3, 7));
+        southNorth.Add(calculator.GetTileCoordinatesHalfTileRight(RectangleAnchorValues.TOP, RectangleAnchorValues.MIDDLE, 3, 6));
         output[DirectionConstants.SUR_NORTE] = southNorth;
 
         //==============
 
         List<Vector2> northSouth = new List<Vector2>();
-        northSouth.Add(calculator.GetTileCoordinatesHalfTileLeft(RectangleAnchorValues.TOP, RectangleAnchorValues.MIDDLE, 3, 7));
+        northSouth.Add(calculator.GetTileCoordinatesHalfTileLeft(RectangleAnchorValues.TOP, RectangleAnchorValues.MIDDLE, 3, 6));
 		
 		
 		currentCurveCoordinates = calculator.GetTileCoordinatesHalfTileLeft(RectangleAnchorValues.TOP, RectangleAnchorValues.MIDDLE, 3, 4);

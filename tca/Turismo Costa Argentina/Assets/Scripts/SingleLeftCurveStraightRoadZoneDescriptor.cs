@@ -38,13 +38,13 @@ public class SingleLeftCurveStraightRoadZoneDescriptor : RoadMapZoneDescriptor
         {
             southNorth.Add(point);
         }
-        southNorth.Add(calculator.GetTileCoordinatesHalfTileRight(RectangleAnchorValues.TOP, RectangleAnchorValues.MIDDLE, 3, 7));
+        southNorth.Add(calculator.GetTileCoordinatesHalfTileRight(RectangleAnchorValues.TOP, RectangleAnchorValues.MIDDLE, 3, 6));
         output[DirectionConstants.SUR_NORTE] = southNorth;
 
         //==============
 
         List<Vector2> northSouth = new List<Vector2>();
-        northSouth.Add(calculator.GetTileCoordinatesHalfTileLeft(RectangleAnchorValues.TOP, RectangleAnchorValues.MIDDLE, 3, 7));
+        northSouth.Add(calculator.GetTileCoordinatesHalfTileLeft(RectangleAnchorValues.TOP, RectangleAnchorValues.MIDDLE, 3, 6));
 
         externalArc = MathUtils.GeneratePointsOnArc(calculator.GetTileCoordinates(RectangleAnchorValues.TOP, RectangleAnchorValues.LEFT, 4, 3), SubtilesSize * 3/ 4, 180, 270, 4);
         foreach(Vector2 point in externalArc)
