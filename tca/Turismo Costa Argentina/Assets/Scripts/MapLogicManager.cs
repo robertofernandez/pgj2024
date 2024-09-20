@@ -97,11 +97,14 @@ public class MapLogicManager
     {
         int index = Mathf.FloorToInt((y - offset) / zonesHeight);
 
-        if(index > 0) 
+        if(index >= 0) 
         {
             if(zonesDescriptorByIndex.Count <= index)
             {
-                zonesDescriptorByIndex.Add(descriptor);
+                while(zonesDescriptorByIndex.Count <= index)
+                {
+                    zonesDescriptorByIndex.Add(descriptor);
+                }
             }
             else
             {
@@ -113,7 +116,10 @@ public class MapLogicManager
             index = -1 * index;
             if(zonesDescriptorByNegativeIndex.Count <= index)
             {
-                zonesDescriptorByNegativeIndex.Add(descriptor);
+                while(zonesDescriptorByNegativeIndex.Count <= index)
+                {
+                    zonesDescriptorByNegativeIndex.Add(descriptor);
+                }
             }
             else
             {

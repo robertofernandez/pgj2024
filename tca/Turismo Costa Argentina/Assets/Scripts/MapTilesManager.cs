@@ -399,7 +399,7 @@ public class MapTilesManager : MonoBehaviour {
         //string printedDirection = DirectionConstants.SUR_NORTE;
         //string printedDirection = DirectionConstants.NORTE_SUR;
 
-        for(int i=0; i<20; i++)
+        for(int i=-1; i<20; i++)
         {
             RoadMapZoneDescriptor descriptor = (RoadMapZoneDescriptor)mapLogicManager.GetDescriptorAt(i);
             if( j < locationMarksNumber)
