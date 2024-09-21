@@ -7,12 +7,38 @@ public abstract class RoadMapZoneDescriptor:MapZoneDescriptor
     public float SubtilesSize { get; set;}
     private Dictionary<string, List<Vector2>> significantPointsByDirection;
     public abstract Dictionary<string, List<Vector2>> GenerateSignificantPointsByDirection();
+    public abstract void BuildSubZones();
 
-    public RoadMapZoneDescriptor(float centerX, float centerY, string typeName, float subtilesAmount, float subtilesSize): base(centerX, centerY, typeName)
+    // Diccionario para guardar subzonas de carreteras (tramos de road)
+    private List<RoadMapSubZoneDescriptor> subZoneDescriptors;
+
+    public RoadMapZoneDescriptor(float centerX, float centerY, string typeName, float subtilesAmount, float subtilesSize) 
+        : base(centerX, centerY, typeName)
     {
         SubtilesAmount = subtilesAmount;
         SubtilesSize = subtilesSize;
         significantPointsByDirection = GenerateSignificantPointsByDirection();
+        subZoneDescriptors = new List<RoadMapSubZoneDescriptor>();
+    }
+
+    // Método para agregar subzonas de carreteras
+    public void AddSubZone(float x, float y, float sizeX, float sizeY, RoadMapSubZoneCalculator calculator)
+    {
+        subZone = new RoadMapSubZoneDescriptor(CenterX + x * SubtilesSize, CenterY + y * SubtilesSize, SubtilesSize * sizeX, SubtilesSize * sizeY, calculator);
+        subZoneDescriptors.Add(subZone);
+    }
+
+    // FUTURE improve using coordinates
+    public RoadMapSubZoneDescriptor GetSubZoneAt(float absoluteX, float absoluteY)
+    {
+        foreach (var subZone in subZoneDescriptors)
+        {
+            if (subZone.Contains(absoluteX, absoluteY))
+            {
+                return subZone;
+            }
+        }
+        return null; // Si no encuentra un subtile que coincida, devuelve null
     }
 
     public List<Vector2> GetSignificantPointsInRoad(string direction)
