@@ -17,8 +17,6 @@ public class SingleRightDiagonalStraightRoadZoneDescriptor : RoadMapZoneDescript
 
     public override void BuildSubZones()
     {
-        //    public void AddSubZone(float x, float y, float sizeX, float sizeY, RoadMapSubZoneCalculator calculator)
-        AddSubZone(4, 7, 1, 1, new StraightRoadSubZoneCalculator());
         AddSubZone(4, 6, 1, 1, new StraightRoadSubZoneCalculator());
         AddSubZone(4, 5, 1, 1, new StraightRoadSubZoneCalculator());
 

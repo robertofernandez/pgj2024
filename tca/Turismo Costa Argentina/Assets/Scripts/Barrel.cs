@@ -29,7 +29,7 @@ public class Barrel : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("algo colisiono: " + collision.gameObject.name);
+        Debug.Log("El jugador ha golpeado un barril: " + collision.gameObject.name);
         if (collision.gameObject.CompareTag("Player")) // Puedes cambiar "Player" por cualquier etiqueta que desees detectar
         {
             /*
@@ -51,7 +51,7 @@ public class Barrel : MonoBehaviour
     {
         if (other.CompareTag("Player")) // Puedes cambiar "Player" por cualquier etiqueta que desees detectar
         {
-            Debug.Log("El jugador ha chocado.");
+            Debug.Log("El jugador ha golpeado un barril.");
             // Agrega aquí la lógica que quieras ejecutar cuando el jugador entre en el trigger
         }
     }

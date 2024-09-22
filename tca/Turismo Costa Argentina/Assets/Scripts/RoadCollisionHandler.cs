@@ -23,7 +23,7 @@ public class RoadCollisionHandler : MonoBehaviour
     {
         if (other.CompareTag("Player")) // Puedes cambiar "Player" por cualquier etiqueta que desees detectar
         {
-            Debug.Log("El jugador ha chocado.");
+            //Debug.Log("El jugador ha chocado.");
             // Agrega aquí la lógica que quieras ejecutar cuando el jugador entre en el trigger
         }
     }

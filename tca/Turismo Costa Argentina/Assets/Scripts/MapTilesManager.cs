@@ -251,9 +251,9 @@ public class MapTilesManager : MonoBehaviour {
 
         MapZoneDescriptor finalTilesetDescriptor = mapLogicManager.GetMapZoneDescriptorOfTypeSurrounding(MapZoneDescriptor.SINGLE_ROAD, finalY);
 
-        //finishLine.transform.position = new Vector3(finalTilesetDescriptor.CenterX, finalTilesetDescriptor.CenterY, 0.2f);
+        finishLine.transform.position = new Vector3(finalTilesetDescriptor.GeometricCenter().x, finalTilesetDescriptor.CenterY, 0.2f);
         //FIXME: CHECK WHY
-        finishLine.transform.position = new Vector3(-6.24f, finalTilesetDescriptor.CenterY, 0.2f);
+        //finishLine.transform.position = new Vector3(-6.24f, finalTilesetDescriptor.CenterY, 0.2f);
 
         mapFinalY = finalTilesetDescriptor.CenterY;
 
@@ -264,7 +264,7 @@ public class MapTilesManager : MonoBehaviour {
             GameObject barrelObject = instantiateObject(barrelPrototype);
             Barrel barrel = barrelObject.GetComponent<Barrel>();
             barrel.characterManager = charactersManager;
-            Debug.Log("putting a barrel near to " + barrelY + "(" +tilesetDescriptor.CenterY + ")");
+            //Debug.Log("putting a barrel near to " + barrelY + "(" +tilesetDescriptor.CenterY + ")");
             barrel.transform.position = new Vector3(-6.24f, tilesetDescriptor.CenterY, 0.2f);
 
             barrelObject = instantiateObject(barrelPrototype);
