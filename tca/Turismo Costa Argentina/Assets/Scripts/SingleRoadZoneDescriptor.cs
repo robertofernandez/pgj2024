@@ -8,6 +8,11 @@ public class SingleRoadZoneDescriptor : RoadMapZoneDescriptor
 
     }
 
+    public override void BuildSubZones()
+    {
+        
+    }
+
     public override Dictionary<string, List<Vector2>> GenerateSignificantPointsByDirection()
     {
         Dictionary<string, List<Vector2>> output = new Dictionary<string, List<Vector2>>();

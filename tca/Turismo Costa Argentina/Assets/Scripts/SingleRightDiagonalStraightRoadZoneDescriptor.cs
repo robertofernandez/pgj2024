@@ -10,6 +10,11 @@ public class SingleRightDiagonalStraightRoadZoneDescriptor : RoadMapZoneDescript
         
     }
 
+    public override void BuildSubZones()
+    {
+        
+    }
+
     public override Dictionary<string, List<Vector2>> GenerateSignificantPointsByDirection()
     {
         TilesetCoordinatesCalculator calculator = TilesUtils.GetTilesetCoordinatesCalculator(CenterX, CenterY, SubtilesAmount, SubtilesAmount, SubtilesSize, SubtilesSize);

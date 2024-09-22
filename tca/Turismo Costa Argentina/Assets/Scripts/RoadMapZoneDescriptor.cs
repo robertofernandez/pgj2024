@@ -24,7 +24,7 @@ public abstract class RoadMapZoneDescriptor:MapZoneDescriptor
     // Método para agregar subzonas de carreteras
     public void AddSubZone(float x, float y, float sizeX, float sizeY, RoadMapSubZoneCalculator calculator)
     {
-        subZone = new RoadMapSubZoneDescriptor(CenterX + x * SubtilesSize, CenterY + y * SubtilesSize, SubtilesSize * sizeX, SubtilesSize * sizeY, calculator);
+        RoadMapSubZoneDescriptor subZone = new RoadMapSubZoneDescriptor(CenterX + x * SubtilesSize, CenterY + y * SubtilesSize, SubtilesSize * sizeX, SubtilesSize * sizeY, calculator);
         subZoneDescriptors.Add(subZone);
     }
 

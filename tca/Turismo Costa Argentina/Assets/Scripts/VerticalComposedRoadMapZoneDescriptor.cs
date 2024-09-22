@@ -3,6 +3,11 @@ using System.Collections.Generic;
 
 public class VerticalComposedRoadMapZoneDescriptor:RoadMapZoneDescriptor
 {
+    public override void BuildSubZones()
+    {
+        
+    }
+
     public override Dictionary<string, List<Vector2>> GenerateSignificantPointsByDirection()
     {
         return new Dictionary<string, List<Vector2>>();

@@ -19,7 +19,7 @@ public class RoadMapSubZoneDescriptor
 
     public bool OnRoad(float x, float y)
     {
-        return calculator.OnRoad(x, y, SizeX, SizeY);
+        return calculator.OnRoad(x, y, SizeX, SizeY, BottomLeftX, BottomLeftY);
     }
 
     // Método que devuelve el punto central de la subzona
