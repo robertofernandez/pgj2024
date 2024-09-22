@@ -85,7 +85,7 @@ public class MapTilesManager : MonoBehaviour {
     public float mapFinalY = 1500;
 
     int locationMarksNumber = 20;
-    int dotMarkersNumber = 100;
+    int dotMarkersNumber = 200;
 
     public bool carOnRoad = false;
     public string currentSubDescriptor = "";
