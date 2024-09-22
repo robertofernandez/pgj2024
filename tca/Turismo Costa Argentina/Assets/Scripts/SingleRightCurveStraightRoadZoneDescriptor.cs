@@ -12,6 +12,11 @@ public class SingleRightCurveStraightRoadZoneDescriptor : RoadMapZoneDescriptor
         
     }
 
+    public override string TypeName()
+    {
+        return "Single Right Curve Straight Road";
+    }
+
     public override void BuildSubZones()
     {
         

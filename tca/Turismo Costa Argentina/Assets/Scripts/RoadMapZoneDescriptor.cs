@@ -8,6 +8,7 @@ public abstract class RoadMapZoneDescriptor:MapZoneDescriptor
     private Dictionary<string, List<Vector2>> significantPointsByDirection;
     public abstract Dictionary<string, List<Vector2>> GenerateSignificantPointsByDirection();
     public abstract void BuildSubZones();
+    public abstract string TypeName();
 
     // Diccionario para guardar subzonas de carreteras (tramos de road)
     private List<RoadMapSubZoneDescriptor> subZoneDescriptors;
@@ -19,6 +20,7 @@ public abstract class RoadMapZoneDescriptor:MapZoneDescriptor
         SubtilesSize = subtilesSize;
         significantPointsByDirection = GenerateSignificantPointsByDirection();
         subZoneDescriptors = new List<RoadMapSubZoneDescriptor>();
+        BuildSubZones();
     }
 
     // Método para agregar subzonas de carreteras
@@ -26,6 +28,20 @@ public abstract class RoadMapZoneDescriptor:MapZoneDescriptor
     {
         RoadMapSubZoneDescriptor subZone = new RoadMapSubZoneDescriptor(CenterX + x * SubtilesSize, CenterY + y * SubtilesSize, SubtilesSize * sizeX, SubtilesSize * sizeY, calculator);
         subZoneDescriptors.Add(subZone);
+    }
+
+    public List<Vector2> GetInterestPoints()
+    {
+        List<Vector2> output = new List<Vector2>();
+        foreach (RoadMapSubZoneDescriptor descriptor in subZoneDescriptors)
+        {
+            // Obtener la lista de puntos de interés de cada descriptor
+            List<Vector2> interestPoints = descriptor.GetInterestPoints();
+            
+            // Agregar todos los puntos de interés a la lista de salida
+            output.AddRange(interestPoints);
+        }
+        return output;
     }
 
     // FUTURE improve using coordinates

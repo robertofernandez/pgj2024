@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class RoadMapSubZoneDescriptor
 {
@@ -15,6 +16,11 @@ public class RoadMapSubZoneDescriptor
         SizeX = sizeX;
         SizeY = sizeY;
         this.calculator = calculator;
+    }
+
+    public List<Vector2> GetInterestPoints()
+    {
+        return calculator.GetInterestPoints(SizeX, SizeY, BottomLeftX, BottomLeftY);
     }
 
     public bool OnRoad(float x, float y)

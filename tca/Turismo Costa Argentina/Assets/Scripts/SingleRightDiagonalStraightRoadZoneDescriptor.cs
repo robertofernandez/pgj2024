@@ -10,9 +10,50 @@ public class SingleRightDiagonalStraightRoadZoneDescriptor : RoadMapZoneDescript
         
     }
 
+    public override string TypeName()
+    {
+        return "Single Right Diagonal Straight Road";
+    }
+
     public override void BuildSubZones()
     {
-        
+        //    public void AddSubZone(float x, float y, float sizeX, float sizeY, RoadMapSubZoneCalculator calculator)
+        AddSubZone(4, 7, 1, 1, new StraightRoadSubZoneCalculator());
+        AddSubZone(4, 6, 1, 1, new StraightRoadSubZoneCalculator());
+        AddSubZone(4, 5, 1, 1, new StraightRoadSubZoneCalculator());
+
+        float trapeziumHeight = 0.1f;
+        List<float> leftPointsForRightCurve = new List<float> { 0.05f, 0.05f, 0.06f, 0.1f, 0.15f, 0.25f, 0.35f, 0.45f, 0.5f, 0.56f};
+
+        // Lista de puntos para el borde derecho (mantiene una línea recta)
+        List<float> rightPointsForRightCurve = new List<float> { 0.45f, 0.45f, 0.47f, 0.49f, 0.53f, 0.6f, 0.75f, 0.85f, 0.92f, 0.94f};
+
+        // Crear puntos simétricos para el borde izquierdo
+        List<float> leftPointsForLeftCurve = new List<float>();
+        foreach (float point in rightPointsForRightCurve)
+        {
+            leftPointsForLeftCurve.Add(1f - point); // Reflexión alrededor del centro
+        }
+
+        // Crear puntos simétricos para el borde derecho
+        List<float> rightPointsForLeftCurve = new List<float>();
+        foreach (float point in leftPointsForRightCurve)
+        {
+            rightPointsForLeftCurve.Add(1f - point); // Reflexión alrededor del centro
+        }
+
+        // Crear el calculador para curva y contracurva a la izquierda (simétrica)
+        TrapeziumComposedSubZoneCalculator leftCurveCalculator = new TrapeziumComposedSubZoneCalculator(
+            trapeziumHeight,
+            leftPointsForLeftCurve,
+            rightPointsForLeftCurve
+        );
+
+        AddSubZone(3, 3, 2, 2, leftCurveCalculator);
+
+        AddSubZone(3, 2, 1, 1, new StraightRoadSubZoneCalculator());
+        AddSubZone(3, 1, 1, 1, new StraightRoadSubZoneCalculator());
+        AddSubZone(3, 0, 1, 1, new StraightRoadSubZoneCalculator());
     }
 
     public override Dictionary<string, List<Vector2>> GenerateSignificantPointsByDirection()

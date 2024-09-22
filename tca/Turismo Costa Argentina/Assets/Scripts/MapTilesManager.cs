@@ -247,7 +247,7 @@ public class MapTilesManager : MonoBehaviour {
         Debug.Log("Max y in map: " + mapLogicManager.GetMaxY());
 
         //FIXME make configurable
-        drawDebugMarkers();
+        drawDebugMarkers2();
 
         MapZoneDescriptor finalTilesetDescriptor = mapLogicManager.GetMapZoneDescriptorOfTypeSurrounding(MapZoneDescriptor.SINGLE_ROAD, finalY);
 
@@ -435,6 +435,30 @@ public class MapTilesManager : MonoBehaviour {
                 dotMarkers[k++].transform.position = new Vector3(descriptor.BottomRight().x , descriptor.BottomRight().y, locationMarks[0].transform.position.z);
                 dotMarkers[k++].transform.position = new Vector3(descriptor.TopRight().x , descriptor.TopRight().y, locationMarks[0].transform.position.z);
                 */
+            }
+        }
+    }
+
+    public void drawDebugMarkers2()
+    {
+        dotMarkers = new GameObject[dotMarkersNumber];
+
+        for(int i=0; i<dotMarkersNumber; i++)
+        {
+            dotMarkers[i] = instantiateObject(dotMarkerPrototype);
+        }
+
+        int k = 0;
+
+        for(int i=-1; i<20; i++)
+        {
+            RoadMapZoneDescriptor descriptor = (RoadMapZoneDescriptor)mapLogicManager.GetDescriptorAt(i);
+            if( k < dotMarkersNumber)
+            {
+                foreach (Vector2 point in descriptor.GetInterestPoints())
+                {
+                    dotMarkers[k++].transform.position = new Vector3(point.x , point.y, dotMarkers[0].transform.position.z);
+                }
             }
         }
     }

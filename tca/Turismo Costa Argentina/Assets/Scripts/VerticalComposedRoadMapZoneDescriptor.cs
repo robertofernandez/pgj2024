@@ -8,6 +8,12 @@ public class VerticalComposedRoadMapZoneDescriptor:RoadMapZoneDescriptor
         
     }
 
+    public override string TypeName()
+    {
+        return "Vertical Composed Road Zone";
+    }
+
+
     public override Dictionary<string, List<Vector2>> GenerateSignificantPointsByDirection()
     {
         return new Dictionary<string, List<Vector2>>();

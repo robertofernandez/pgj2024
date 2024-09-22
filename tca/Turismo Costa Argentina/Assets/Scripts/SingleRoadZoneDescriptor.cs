@@ -8,6 +8,11 @@ public class SingleRoadZoneDescriptor : RoadMapZoneDescriptor
 
     }
 
+    public override string TypeName()
+    {
+        return "Straight Road";
+    }
+
     public override void BuildSubZones()
     {
         
