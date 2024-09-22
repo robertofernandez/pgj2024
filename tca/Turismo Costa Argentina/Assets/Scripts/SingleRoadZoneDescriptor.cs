@@ -15,13 +15,13 @@ public class SingleRoadZoneDescriptor : RoadMapZoneDescriptor
 
     public override void BuildSubZones()
     {
-        AddSubZone(3, 6, 1, 1, new StraightRoadSubZoneCalculator());
-        AddSubZone(3, 5, 1, 1, new StraightRoadSubZoneCalculator());
-        AddSubZone(3, 4, 1, 1, new StraightRoadSubZoneCalculator());
-        AddSubZone(3, 3, 1, 1, new StraightRoadSubZoneCalculator());
-        AddSubZone(3, 2, 1, 1, new StraightRoadSubZoneCalculator());
-        AddSubZone(3, 1, 1, 1, new StraightRoadSubZoneCalculator());
-        AddSubZone(3, 0, 1, 1, new StraightRoadSubZoneCalculator());
+        AddSubZone(3, 6, 1, 1, new StraightRoadSubZoneCalculator(), "straight");
+        AddSubZone(3, 5, 1, 1, new StraightRoadSubZoneCalculator(), "straight");
+        AddSubZone(3, 4, 1, 1, new StraightRoadSubZoneCalculator(), "straight");
+        AddSubZone(3, 3, 1, 1, new StraightRoadSubZoneCalculator(), "straight");
+        AddSubZone(3, 2, 1, 1, new StraightRoadSubZoneCalculator(), "straight");
+        AddSubZone(3, 1, 1, 1, new StraightRoadSubZoneCalculator(), "straight");
+        AddSubZone(3, 0, 1, 1, new StraightRoadSubZoneCalculator(), "straight");
     }
 
     public override Dictionary<string, List<Vector2>> GenerateSignificantPointsByDirection()

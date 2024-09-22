@@ -17,8 +17,8 @@ public class SingleLeftDiagonalStraightRoadZoneDescriptor : RoadMapZoneDescripto
 
     public override void BuildSubZones()
     {
-        AddSubZone(3, 6, 1, 1, new StraightRoadSubZoneCalculator());
-        AddSubZone(3, 5, 1, 1, new StraightRoadSubZoneCalculator());
+        AddSubZone(3, 6, 1, 1, new StraightRoadSubZoneCalculator(), "straight");
+        AddSubZone(3, 5, 1, 1, new StraightRoadSubZoneCalculator(), "straight");
 
         float trapeziumHeight = 0.1f;
         List<float> leftPointsForRightCurve = new List<float> { 0.05f, 0.05f, 0.1f, 0.15f, 0.26f, 0.4f, 0.5f, 0.53f, 0.54f, 0.56f};
@@ -33,11 +33,11 @@ public class SingleLeftDiagonalStraightRoadZoneDescriptor : RoadMapZoneDescripto
             rightPointsForRightCurve
         );
 
-        AddSubZone(3, 3, 2, 2, rightCurveCalculator);
+        AddSubZone(3, 3, 2, 2, rightCurveCalculator, "diagonal");
 
-        AddSubZone(4, 2, 1, 1, new StraightRoadSubZoneCalculator());
-        AddSubZone(4, 1, 1, 1, new StraightRoadSubZoneCalculator());
-        AddSubZone(4, 0, 1, 1, new StraightRoadSubZoneCalculator());
+        AddSubZone(4, 2, 1, 1, new StraightRoadSubZoneCalculator(), "straight");
+        AddSubZone(4, 1, 1, 1, new StraightRoadSubZoneCalculator(), "straight");
+        AddSubZone(4, 0, 1, 1, new StraightRoadSubZoneCalculator(), "straight");
     }
 
     public override Dictionary<string, List<Vector2>> GenerateSignificantPointsByDirection()

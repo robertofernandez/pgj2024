@@ -24,9 +24,9 @@ public abstract class RoadMapZoneDescriptor:MapZoneDescriptor
     }
 
     // Método para agregar subzonas de carreteras
-    public void AddSubZone(float x, float y, float sizeX, float sizeY, RoadMapSubZoneCalculator calculator)
+    public void AddSubZone(float x, float y, float sizeX, float sizeY, RoadMapSubZoneCalculator calculator, string typeName)
     {
-        RoadMapSubZoneDescriptor subZone = new RoadMapSubZoneDescriptor(CenterX + x * SubtilesSize, CenterY + y * SubtilesSize, SubtilesSize * sizeX, SubtilesSize * sizeY, calculator);
+        RoadMapSubZoneDescriptor subZone = new RoadMapSubZoneDescriptor(CenterX + x * SubtilesSize, CenterY + y * SubtilesSize, SubtilesSize * sizeX, SubtilesSize * sizeY, calculator, typeName);
         subZoneDescriptors.Add(subZone);
     }
 
@@ -55,6 +55,16 @@ public abstract class RoadMapZoneDescriptor:MapZoneDescriptor
             }
         }
         return null; // Si no encuentra un subtile que coincida, devuelve null
+    }
+
+    public bool OnRoad(float absoluteX, float absoluteY)
+    {
+        RoadMapSubZoneDescriptor szd = GetSubZoneAt(absoluteX, absoluteY);
+        if(szd != null)
+        {
+            return szd.OnRoad(absoluteX, absoluteY);
+        }
+        return false;
     }
 
     public List<Vector2> GetSignificantPointsInRoad(string direction)

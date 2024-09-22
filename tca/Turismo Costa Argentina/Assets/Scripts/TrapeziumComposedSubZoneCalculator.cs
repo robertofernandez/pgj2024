@@ -32,7 +32,6 @@ public class TrapeziumComposedSubZoneCalculator : RoadMapSubZoneCalculator
         return output;
     }
 
-
     // Método para determinar si el punto (x, y) está dentro de la ruta formada por los trapecios
     public override bool OnRoad(float x, float y, float sizeX, float sizeY, float BottomLeftX, float BottomLeftY)
     {

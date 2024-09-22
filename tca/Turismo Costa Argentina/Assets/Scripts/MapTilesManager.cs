@@ -87,6 +87,8 @@ public class MapTilesManager : MonoBehaviour {
     int locationMarksNumber = 20;
     int dotMarkersNumber = 100;
 
+    public bool carOnRoad = false;
+    public string currentSubDescriptor = "";
 
     public MapTilesManager()
     {
@@ -348,6 +350,32 @@ public class MapTilesManager : MonoBehaviour {
     void FixedUpdate()
     {
         updateBaseTilesPosition();
+        float characterX = charactersManager.getMainPlayerTransform().position.x;
+        float characterY = charactersManager.getMainPlayerTransform().position.y;
+
+        RoadMapZoneDescriptor roadMapZoneDescriptor = (RoadMapZoneDescriptor)mapLogicManager.GetDescriptor(characterY);
+        RoadMapSubZoneDescriptor descriptor = roadMapZoneDescriptor.GetSubZoneAt(characterX, characterY);
+        if(descriptor == null)
+        {
+            currentSubDescriptor = "No descriptor";
+        }
+        else
+        {
+            currentSubDescriptor = "Descriptor: " + descriptor.TypeName;
+        }
+        bool nowOnRoad = roadMapZoneDescriptor.OnRoad(characterX, characterY);
+        if(carOnRoad != nowOnRoad)
+        {
+            carOnRoad = nowOnRoad;
+            if(carOnRoad)
+            {
+                Debug.Log("Entered road");
+            }
+            else
+            {
+                Debug.Log("Out of road");
+            }
+        }
     }
 
     public void updateBaseTilesPosition()
@@ -457,7 +485,10 @@ public class MapTilesManager : MonoBehaviour {
             {
                 foreach (Vector2 point in descriptor.GetInterestPoints())
                 {
-                    dotMarkers[k++].transform.position = new Vector3(point.x , point.y, dotMarkers[0].transform.position.z);
+                    if( k < dotMarkersNumber)
+                    {
+                        dotMarkers[k++].transform.position = new Vector3(point.x , point.y, dotMarkers[0].transform.position.z);
+                    }
                 }
             }
         }

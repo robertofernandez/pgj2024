@@ -8,11 +8,13 @@ public class RoadMapSubZoneDescriptor
     public float SizeX { get; private set; }
     public float SizeY { get; private set; }
     private RoadMapSubZoneCalculator calculator;
+    public string TypeName { get; private set; }
 
-    public RoadMapSubZoneDescriptor(float bottomLeftX, float bottomLeftY, float sizeX, float sizeY, RoadMapSubZoneCalculator calculator)
+    public RoadMapSubZoneDescriptor(float bottomLeftX, float bottomLeftY, float sizeX, float sizeY, RoadMapSubZoneCalculator calculator, string typeName)
     {
         BottomLeftX = bottomLeftX;
         BottomLeftY = bottomLeftY;
+        TypeName = typeName;
         SizeX = sizeX;
         SizeY = sizeY;
         this.calculator = calculator;
