@@ -90,6 +90,8 @@ public class MapTilesManager : MonoBehaviour {
     public bool carOnRoad = false;
     public string currentSubDescriptor = "";
 
+    public string currentZoneDescriptor = "";
+
     public MapTilesManager()
     {
         tilesDictionary = new Dictionary<string,GameObject>();
@@ -353,28 +355,36 @@ public class MapTilesManager : MonoBehaviour {
         float characterX = charactersManager.getMainPlayerTransform().position.x;
         float characterY = charactersManager.getMainPlayerTransform().position.y;
 
-        RoadMapZoneDescriptor roadMapZoneDescriptor = (RoadMapZoneDescriptor)mapLogicManager.GetDescriptor(characterY);
-        RoadMapSubZoneDescriptor descriptor = roadMapZoneDescriptor.GetSubZoneAt(characterX, characterY);
-        if(descriptor == null)
+        RoadMapZoneDescriptor roadMapZoneDescriptor = (RoadMapZoneDescriptor) mapLogicManager.GetDescriptor(characterY);
+        if(roadMapZoneDescriptor != null)
         {
-            currentSubDescriptor = "No descriptor";
-        }
-        else
-        {
-            currentSubDescriptor = "Descriptor: " + descriptor.TypeName;
-        }
-        bool nowOnRoad = roadMapZoneDescriptor.OnRoad(characterX, characterY);
-        if(carOnRoad != nowOnRoad)
-        {
-            carOnRoad = nowOnRoad;
-            if(carOnRoad)
+            currentZoneDescriptor = roadMapZoneDescriptor.GetDebugDescription();
+            RoadMapSubZoneDescriptor descriptor = roadMapZoneDescriptor.GetSubZoneAt(characterX, characterY);
+            if(descriptor == null)
             {
-                Debug.Log("Entered road");
+                currentSubDescriptor = "No descriptor";
             }
             else
             {
-                Debug.Log("Out of road");
+                currentSubDescriptor = descriptor.GetDebugDescription();
             }
+            bool nowOnRoad = roadMapZoneDescriptor.OnRoad(characterX, characterY);
+            if(carOnRoad != nowOnRoad)
+            {
+                carOnRoad = nowOnRoad;
+                if(carOnRoad)
+                {
+                    Debug.Log("Entered road");
+                }
+                else
+                {
+                    Debug.Log("Out of road");
+                }
+            }
+        }
+        else
+        {
+            currentZoneDescriptor = "No descriptor";
         }
     }
 

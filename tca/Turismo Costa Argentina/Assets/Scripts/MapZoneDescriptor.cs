@@ -11,6 +11,7 @@ public abstract class MapZoneDescriptor
     public float CenterX { get; set; }
     public float CenterY { get; set;}
     public string TypeName { get; set; }
+    public int IndexInLogic { get; set; }
 
     public MapZoneDescriptor(float centerX, float centerY, string typeName)
     {

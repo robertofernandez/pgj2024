@@ -63,4 +63,9 @@ public class RoadMapSubZoneDescriptor
     {
         return new Vector2(BottomLeftX + SizeX, BottomLeftY + SizeY);
     }
+
+    public string GetDebugDescription()
+    {
+        return $"Type: {TypeName}, Bottom-Left: ({BottomLeftX}, {BottomLeftY}), Size: ({SizeX}, {SizeY})";
+    }
 }

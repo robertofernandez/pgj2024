@@ -26,14 +26,7 @@ public class MapLogicManager
 
     public int GetIndex(float y)
     {
-        if(hasDescriptor(y))
-        {
-            return Mathf.FloorToInt((y - offset) / zonesHeight);
-        }
-        else
-        {
-            throw new ArgumentException("No element present at that position (" + y + ")");
-        }
+        return Mathf.FloorToInt((y + offset) / zonesHeight);
     }
 
     public MapZoneDescriptor GetDescriptorAt(int index)
@@ -44,27 +37,20 @@ public class MapLogicManager
         }
         else
         {
-            return zonesDescriptorByNegativeIndex[-1 * index];
+            return zonesDescriptorByNegativeIndex[-1 * index - 1];
         }
     }
 
     public MapZoneDescriptor GetDescriptor(float y)
     {
-        if(hasDescriptor(y))
+        int index = GetIndex(y);
+        if(hasDescriptorAtIndex(index))
         {
-
-            int index = Mathf.FloorToInt((y - offset) / zonesHeight);
-            if(index > 0) 
-            {
-                return zonesDescriptorByIndex[index];
-            }
-            else
-            {
-                return zonesDescriptorByNegativeIndex[-1 * index];
-            }
+            return GetDescriptorAt(index);
         }
         else
         {
+            Debug.Log("No descriptor for y = " + y + "(index " + index + ")");
             throw new ArgumentException("No element present at that position");
         }
     }
@@ -81,22 +67,27 @@ public class MapLogicManager
 
     public bool hasDescriptor(float y)
     {
-        int index = Mathf.FloorToInt((y - offset) / zonesHeight);
+        int index = GetIndex(y);
+        return hasDescriptorAtIndex(index);
+    }
 
-        if(index > 0) 
+    public bool hasDescriptorAtIndex(int index)
+    {
+        if(index >= 0) 
         {
             return (zonesDescriptorByIndex.Count > index);
         }
         else
         {
-            return (zonesDescriptorByNegativeIndex.Count > index);
+            return (zonesDescriptorByNegativeIndex.Count > (- 1 + index * -1));
         }
     }
 
+
     public void AddOrderedDescriptor(float y, MapZoneDescriptor descriptor)
     {
-        int index = Mathf.FloorToInt((y - offset) / zonesHeight);
-
+        int index = GetIndex(y);
+        descriptor.IndexInLogic = index;
         if(index >= 0) 
         {
             if(zonesDescriptorByIndex.Count <= index)
@@ -113,7 +104,7 @@ public class MapLogicManager
         }
         else
         {
-            index = -1 * index;
+            index = -1 * index - 1;
             if(zonesDescriptorByNegativeIndex.Count <= index)
             {
                 while(zonesDescriptorByNegativeIndex.Count <= index)
@@ -125,26 +116,6 @@ public class MapLogicManager
             {
                 zonesDescriptorByNegativeIndex[index] = descriptor;
             }
-        }
-    }
-
-    public void AddDescriptor(float y, MapZoneDescriptor descriptor)
-    {
-        if(hasDescriptor(y))
-        {
-            int index = Mathf.FloorToInt((y - offset) / zonesHeight);
-            if(index > 0) 
-            {
-                zonesDescriptorByIndex[index] = descriptor;
-            }
-            else
-            {
-                zonesDescriptorByNegativeIndex[-1*index] = descriptor;
-            }
-        }
-        else
-        {
-            throw new ArgumentException("No enough size of the descriptors list to add a new element. All maps elements neede to be added in order an then can be replaced by other descriptors.");
         }
     }
 

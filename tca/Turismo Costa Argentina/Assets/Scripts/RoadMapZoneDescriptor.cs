@@ -100,4 +100,9 @@ public abstract class RoadMapZoneDescriptor:MapZoneDescriptor
     {
         return new Vector2(CenterX + SubtilesAmount * SubtilesSize, CenterY + SubtilesAmount * SubtilesSize);
     }
+
+    public string GetDebugDescription()
+    {
+        return $"Type: {TypeName()}, Index: {IndexInLogic}, Bottom-Left: ({BottomLeft().x}, {BottomLeft().y}), Size: ({SubtilesAmount * SubtilesSize}, {SubtilesAmount * SubtilesSize})";
+    }
 }
