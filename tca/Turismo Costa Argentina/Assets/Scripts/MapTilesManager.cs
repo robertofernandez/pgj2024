@@ -6,6 +6,8 @@ public class MapTilesManager : MonoBehaviour {
     public GameObject finishLine;
 
     public GameObject barrelPrototype;
+    public GameObject dividerTop;
+    public GameObject dividerBottom;
 
     public GameObject singleRoadTile;
     public GameObject singleCurveStraightRoadTile;
@@ -65,6 +67,9 @@ public class MapTilesManager : MonoBehaviour {
 
     private float tileSizeY = 21 * 1.5f;
 
+    private float initialX = -22f;
+    private float initialY = -21f * 1.5f;
+
     public GameObject casa0;
     public GameObject casa1;
     public GameObject casa2;
@@ -92,12 +97,14 @@ public class MapTilesManager : MonoBehaviour {
 
     public string currentZoneDescriptor = "";
 
+    public string currentZoneIndex = "";
+
     public MapTilesManager()
     {
         tilesDictionary = new Dictionary<string,GameObject>();
         roadTilesSetDictionary = new Dictionary<string, GameObject>();
         shoreTilesSetDictionary = new Dictionary<string, GameObject>();
-        mapLogicManager = new MapLogicManager(tileSizeY, -1 * tileSizeY / 2);
+        mapLogicManager = new MapLogicManager(tileSizeY, initialY);
     }
 
     void Start() 
@@ -171,9 +178,6 @@ public class MapTilesManager : MonoBehaviour {
         initializeGenericDecoPositions(allDecoElements, -15, 0, 2);
         initializeGenericDecoPositions(allDecoElementsRight, 2, 0, 1);
 
-        float initialX = -22f;
-        float initialY = -21f * 1.5f;
-
         //TODO make configurable
         int totalTilesSetInMap = 50;
 
@@ -184,7 +188,7 @@ public class MapTilesManager : MonoBehaviour {
         charactersManager = charactersManagerGameObject.GetComponent<CharactersManager>();
 
         //GameObject playerCar = instantiatePlayerCar(-5.15f, 6f);
-        startLine.transform.position = new Vector3(-6.24f, 7.72f, 0.2f);      
+        startLine.transform.position = new Vector3(-6.24f, 7.72f, 0.2f);
 
         tilesDictionary.Add("single road", singleRoadTile);
         tilesDictionary.Add("single curve road", singleCurveStraightRoadTile);
@@ -358,7 +362,11 @@ public class MapTilesManager : MonoBehaviour {
         RoadMapZoneDescriptor roadMapZoneDescriptor = (RoadMapZoneDescriptor) mapLogicManager.GetDescriptor(characterY);
         if(roadMapZoneDescriptor != null)
         {
+            dividerTop.transform.position = new Vector3(roadMapZoneDescriptor.GeometricCenter().x, roadMapZoneDescriptor.TopLeft().y, 0.2f);
+            dividerBottom.transform.position = new Vector3(roadMapZoneDescriptor.GeometricCenter().x, roadMapZoneDescriptor.BottomLeft().y, 0.2f);
+
             currentZoneDescriptor = roadMapZoneDescriptor.GetDebugDescription();
+            currentZoneIndex = "" + roadMapZoneDescriptor.IndexInLogic;
             RoadMapSubZoneDescriptor descriptor = roadMapZoneDescriptor.GetSubZoneAt(characterX, characterY);
             if(descriptor == null)
             {
