@@ -161,6 +161,12 @@ public class Balloon : MonoBehaviour
         // Sonido, score, etc.
         // GameManager.Instance.AddScore(scoreValue);
         
+        Cage cage = GetComponentInParent<Cage>();
+        if (cage != null)
+        {
+            cage.ReleaseHamster();
+        }
+
         // Destruir después de un tiempo
         Destroy(gameObject, 5f); // Destruir después de 5 segundos de caída
     }
