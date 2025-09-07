@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 540135828695483927}
   - component: {fileID: 1593981782061628813}
   - component: {fileID: 6349826419561038175}
+  - component: {fileID: 5879898891906973681}
   m_Layer: 3
   m_Name: BalloonBody
   m_TagString: Untagged
@@ -152,6 +153,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5879898891906973681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573992807837522341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54609b77b976c45459fb187a8b147912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  balloonController: {fileID: 0}
 --- !u!1 &4188714842115608345
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,6 +262,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8626659801922102189}
+  - component: {fileID: 2747248017203149272}
+  - component: {fileID: 8639327802377819572}
   m_Layer: 0
   m_Name: Balloon
   m_TagString: Untagged
@@ -272,3 +288,52 @@ Transform:
   - {fileID: 2622699472301859858}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2747248017203149272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5724478540108157965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18c3f607cac86b14d979b014cc264460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1
+  popEffect: {fileID: 0}
+  scoreValue: 10
+  riseSpeed: 1.1
+  maxHeight: 3.1
+  fallSpeed: 3
+  useRigidbodyForFall: 1
+  balloonVisual: {fileID: 5885090923698496144}
+  stringVisual: {fileID: 2622699472301859858}
+  rb: {fileID: 8639327802377819572}
+--- !u!50 &8639327802377819572
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5724478540108157965}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
