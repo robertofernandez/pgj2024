@@ -5,7 +5,7 @@ public class PowerMeterController : MonoBehaviour
 {
     [Header("Configuración")]
     [Range(0, 5)]
-    public int currentPower = 5; // Potencia actual (0-5)
+    public int currentPower = 0; // Potencia actual (0-5)
 
     [Header("Referencias de los Chunks")]
     [Tooltip("Arrastra aquí los chunks en ORDEN. El primero es el chunk 1, el último el chunk 5.")]

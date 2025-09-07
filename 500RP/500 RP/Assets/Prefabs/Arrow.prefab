@@ -129,8 +129,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e4daa91dca81e440a98d063eafc9863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateToMatchVelocity: 1
-  rotationSmoothing: 5
+  damage: 1
+  maxBounces: 3
+  velocityReductionOnHit: 0.3
+  balloonLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  hitEffect: {fileID: 0}
 --- !u!1 &5907768696041743215
 GameObject:
   m_ObjectHideFlags: 0

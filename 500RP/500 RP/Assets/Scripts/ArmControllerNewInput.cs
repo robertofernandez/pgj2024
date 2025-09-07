@@ -4,6 +4,9 @@ public class ArmControllerNewInput : MonoBehaviour
 {
     [Header("Referencias")]
     public Transform armPivot;
+
+    public Transform pipoAndElevator;
+
     public NewInputController inputController; // Ahora usa el nuevo controller
 
     [Header("Configuración")]
@@ -34,7 +37,7 @@ public class ArmControllerNewInput : MonoBehaviour
         float targetHeight = currentHeight + (inputController.moveY * moveSpeed * Time.deltaTime);
         currentHeight = Mathf.Clamp(targetHeight, minHeight, maxHeight);
         
-        transform.position = new Vector3(transform.position.x, currentHeight, transform.position.z);
+        pipoAndElevator.position = new Vector3(pipoAndElevator.position.x, currentHeight, pipoAndElevator.position.z);
     }
 
     public float GetNormalizedAngle()
