@@ -10,8 +10,8 @@ public class ArmControllerNewInput : MonoBehaviour
     public NewInputController inputController; // Ahora usa el nuevo controller
 
     [Header("Configuración")]
-    public float minAngle = -45f;
-    public float maxAngle = 45f;
+    public float minAngle = -30f;
+    public float maxAngle = 30f;
     public float rotationSpeed = 180f;
     public float minHeight = -2f;
     public float maxHeight = 2f;

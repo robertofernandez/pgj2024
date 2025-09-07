@@ -896,8 +896,8 @@ MonoBehaviour:
   armPivot: {fileID: 1753511848}
   pipoAndElevator: {fileID: 1765894261}
   inputController: {fileID: 914138641}
-  minAngle: -45
-  maxAngle: 45
+  minAngle: -30
+  maxAngle: 30
   rotationSpeed: 180
   minHeight: -2
   maxHeight: 2

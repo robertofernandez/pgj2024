@@ -82,8 +82,8 @@ public class NewInputController : MonoBehaviour
 
             // Apuntado (flechas izquierda/derecha)
             aimAngle = 0f;
-            if (pressedKeys.Contains("leftArrow")) aimAngle -= 1f;
-            if (pressedKeys.Contains("rightArrow")) aimAngle += 1f;
+            if (pressedKeys.Contains("leftArrow")) aimAngle += 1f;
+            if (pressedKeys.Contains("rightArrow")) aimAngle -= 1f;
 
             // Carga de disparo
             isCharging = pressedKeys.Contains("space");
