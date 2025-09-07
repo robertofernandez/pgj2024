@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 168649195635557311}
   - component: {fileID: 3758432600119362522}
+  - component: {fileID: 8398190349383202904}
+  - component: {fileID: 568359900580061889}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Untagged
@@ -88,6 +90,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &8398190349383202904
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5298216293319738635}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
+--- !u!114 &568359900580061889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5298216293319738635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e4daa91dca81e440a98d063eafc9863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateToMatchVelocity: 1
+  rotationSmoothing: 5
 --- !u!1 &5907768696041743215
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class ShootingControllerNewInput : MonoBehaviour
     [Header("Configuración de Disparo")]
     public float minForce = 5f;
     public float maxForce = 20f;
-    public float maxChargeTime = 2f;
+    public float maxChargeTime = 0.8f;
 
     private float currentChargeTime = 0f;
     private bool isCharging = false;
@@ -75,7 +75,7 @@ public class ShootingControllerNewInput : MonoBehaviour
         
         if (rb != null)
         {
-            Vector2 shootDirection = shootPoint.right;
+            Vector2 shootDirection = - shootPoint.right;
             rb.AddForce(shootDirection * force, ForceMode2D.Impulse);
         }
     }
