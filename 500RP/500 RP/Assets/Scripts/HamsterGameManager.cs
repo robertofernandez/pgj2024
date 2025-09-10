@@ -1,9 +1,19 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class HamsterGameManager : MonoBehaviour
 {
     public static HamsterGameManager Instance;
+
+    [Header("Configuración de escenario")]
+    public float minX = -8.71f;
+    public float maxX = 3.7f;
+    public float y = -4.3f;
+    public float hamsterWidth = 0.39f;
+    public float cageWidth = 0.707f;
+    public int maxSimultaneousCages = 4;
+    int zonesAmount = 3;
 
     [Header("Configuración de Niveles")]
     public int currentLevel = 1;
@@ -23,6 +33,9 @@ public class HamsterGameManager : MonoBehaviour
     public List<Transform> hamsterSpawnPoints = new List<Transform>();
 
     private List<Hamster> activeHamsters = new List<Hamster>();
+    private Zone[] zones;
+
+    public float[] capturePoints;
 
     void Awake()
     {
@@ -44,6 +57,37 @@ public class HamsterGameManager : MonoBehaviour
 
     public void StartLevel(int level)
     {
+        zones = new Zone[zonesAmount];
+        float pickUpZoneWidth = maxX - minX;
+        int pickUpPointsAmount = (int) Math.Floor((double)pickUpZoneWidth / (double)cageWidth);
+        int pointsByZone = (int) Math.Floor((double)pickUpPointsAmount / (double)zonesAmount);
+        //int zonesAmount = Math.Floor(pickUpPointsAmount / maxSimultaneousCages);
+
+        capturePoints = new float[pickUpPointsAmount];
+
+        float currentX = minX;
+        
+
+        for (int i=0; i<pickUpPointsAmount;i++)
+        {
+            capturePoints[i] = currentX;
+            currentX+=cageWidth;
+        }
+
+        for (int i=0; i<zonesAmount;i++)
+        {
+            zones[i] = new Zone(capturePoints, i * pointsByZone, pointsByZone);
+        }
+
+        int simulationTime = 500;
+        int initialZone = UnityEngine.Random.Range(0, zonesAmount);
+
+        foreach (var zone in zones)
+        {
+            Debug.Log($"Zone created: {zone}");
+        }
+
+
         currentLevel = level;
         capturedHamsters = 0;
         escapedHamsters = 0;
