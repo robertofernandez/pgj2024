@@ -7,12 +7,15 @@ public class Hamster : MonoBehaviour
     public float moveSpeed = 1.2f;
     public float decisionTimeMin = 3f;
     public float decisionTimeMax = 6f;
+    public float eatingTimeMin = 2f;
+    public float eatingTimeMax = 5f;
 
     [Header("Estado")]
     public bool isTargeted = false;
     public bool isCaptured = false;
     public bool isEscaping = false;
     public bool isTrapped = false;
+    public bool isEating = false;
 
     [Header("Debug")]
     public float[] capturePoints;   // puntos en X
@@ -47,6 +50,17 @@ public class Hamster : MonoBehaviour
         {
             // correr a la izquierda
             transform.position += Vector3.left * moveSpeed * 2f * Time.deltaTime;
+            return;
+        }
+
+        if (isEating)
+        {
+            decisionTimer -= Time.deltaTime;
+            if (decisionTimer <= 0)
+            {
+                isEating = false;
+                PickRandomTarget();
+            }
             return;
         }
 
@@ -89,10 +103,19 @@ public class Hamster : MonoBehaviour
             transform.localScale = new Vector3(0.15f, 0.15f, 1);
         }
 
-        // cuando llega, elige otro punto
+        // cuando llega, chance de comer
         if (Mathf.Abs(transform.position.x - currentTargetX) < 0.05f)
         {
-            PickRandomTarget();
+            // 50% de chance de comer (podés ajustar la probabilidad)
+            if (Random.value < 0.5f)
+            {
+                isEating = true;
+                decisionTimer = Random.Range(eatingTimeMin, eatingTimeMax);
+            }
+            else
+            {
+                PickRandomTarget();
+            }
         }
     }
 
