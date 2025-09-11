@@ -76,7 +76,7 @@ public class Cage : MonoBehaviour
             if (distance < 1.5f)
             {
                 trappedHamster = targetHamster;
-                trappedHamster.Trap();
+                trappedHamster.Capture(transform);
                 Debug.Log("Hamster atrapado en el suelo!");
             }
         }

@@ -17,8 +17,8 @@ public class HamsterGameManager : MonoBehaviour
 
     [Header("Configuración de Niveles")]
     public int currentLevel = 1;
-    public int initialHamsters = 12;
-    public int hamstersPerLevelIncrease = 2;
+    public int initialHamsters = 32;
+    public int hamstersPerLevelIncrease = 6;
     public int maxCapturedToLose = 8;
 
     [Header("Estado del Juego")]
@@ -79,27 +79,26 @@ public class HamsterGameManager : MonoBehaviour
             zones[i] = new Zone(capturePoints, i * pointsByZone, pointsByZone);
         }
 
-        int simulationTime = 500;
-        int initialZone = UnityEngine.Random.Range(0, zonesAmount);
-
         foreach (var zone in zones)
         {
             Debug.Log($"Zone created: {zone}");
         }
 
+        int simulationTime = 500;
+        int initialZone = UnityEngine.Random.Range(0, zonesAmount);
+
+        // Calcular hamsters para este nivel
+        totalHamstersInLevel = initialHamsters + ((level - 1) * hamstersPerLevelIncrease);
 
         currentLevel = level;
         capturedHamsters = 0;
         escapedHamsters = 0;
         levelCompleted = false;
 
-        // Calcular hamsters para este nivel
-        totalHamstersInLevel = initialHamsters + ((level - 1) * hamstersPerLevelIncrease);
-        
-        SpawnHamsters(totalHamstersInLevel);
+        SpawnHamsters(totalHamstersInLevel, pickUpPointsAmount);
     }
 
-    private void SpawnHamsters(int count)
+    private void SpawnHamsters(int count, int pickUpPointsAmount)
     {
         // Limpiar hamsters anteriores
         foreach (Transform child in hamsterContainer)
@@ -111,12 +110,13 @@ public class HamsterGameManager : MonoBehaviour
         // Generar hamsters
         for (int i = 0; i < count; i++)
         {
-            if (i < hamsterSpawnPoints.Count)
-            {
-                GameObject hamsterGO = Instantiate(hamsterPrefab, hamsterSpawnPoints[i].position, Quaternion.identity, hamsterContainer);
+                float x = capturePoints[i%pickUpPointsAmount];
+                Vector3 customPosition = new Vector3(x, y, -2.5f); // Reemplaza 5.0f y 3.0f con tus valores conocidos
+                GameObject hamsterGO = Instantiate(hamsterPrefab, customPosition, Quaternion.identity, hamsterContainer);
+
                 Hamster hamster = hamsterGO.GetComponent<Hamster>();
+                hamster.Init(capturePoints);
                 activeHamsters.Add(hamster);
-            }
         }
     }
 

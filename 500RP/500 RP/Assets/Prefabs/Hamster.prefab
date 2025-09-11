@@ -152,12 +152,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63ccb3a2bb198a149b6c3f839ae8a74a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  avoidanceRadius: 0.5
-  decisionTimeMin: 1
-  decisionTimeMax: 3
-  isTrapped: 0
+  moveSpeed: 1.2
+  decisionTimeMin: 3
+  decisionTimeMax: 6
+  isTargeted: 0
+  isCaptured: 0
   isEscaping: 0
+  isTrapped: 0
+  capturePoints: []
+  currentTargetX: 0
+  decisionTimer: 0
 --- !u!58 &1937587717943295465
 CircleCollider2D:
   m_ObjectHideFlags: 0

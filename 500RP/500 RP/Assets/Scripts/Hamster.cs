@@ -4,83 +4,123 @@ using System.Collections;
 public class Hamster : MonoBehaviour
 {
     [Header("Configuración")]
-    public float moveSpeed = 2f;
-    public float avoidanceRadius = 0.5f;
-    public float decisionTimeMin = 1f;
-    public float decisionTimeMax = 3f;
+    public float moveSpeed = 1.2f;
+    public float decisionTimeMin = 3f;
+    public float decisionTimeMax = 6f;
 
     [Header("Estado")]
-    public bool isTrapped = false;
+    public bool isTargeted = false;
+    public bool isCaptured = false;
     public bool isEscaping = false;
+    public bool isTrapped = false;
 
-    private Rigidbody2D rb;
-    private Vector2 movementDirection;
-    private float decisionTimer;
+    [Header("Debug")]
+    public float[] capturePoints;   // puntos en X
+    public float currentTargetX;    // hacia dónde se mueve
+    public float decisionTimer;
 
-    void Start()
+    private Transform cage; // referencia a la jaula si está atrapado
+
+    public void Init(float[] points)
     {
-        rb = GetComponent<Rigidbody2D>();
-        SetRandomDecision();
+        capturePoints = points;
+        PickRandomTarget();
     }
 
     void Update()
     {
-        if (isTrapped || isEscaping) return;
+        if (isCaptured)
+        {
+            // sigue la jaula hacia arriba
+            if (cage != null)
+                transform.position = cage.position + Vector3.down * 0.5f;
+            return;
+        }
 
+        if (isTargeted)
+        {
+            // quieto
+            return;
+        }
+
+        if (isEscaping)
+        {
+            // correr a la izquierda
+            transform.position += Vector3.left * moveSpeed * 2f * Time.deltaTime;
+            return;
+        }
+
+        // movimiento normal
         decisionTimer -= Time.deltaTime;
         if (decisionTimer <= 0)
         {
-            SetRandomDecision();
+            PickRandomTarget();
         }
 
-        Move();
-        AvoidOtherHamsters();
+        MoveTowardsTarget();
     }
 
-    private void SetRandomDecision()
+    private void PickRandomTarget()
     {
-        movementDirection = new Vector2(Random.Range(-1f, 1f), 0).normalized;
+        if (capturePoints == null || capturePoints.Length == 0) return;
+
+        int index = Random.Range(0, capturePoints.Length);
+        currentTargetX = capturePoints[index];
         decisionTimer = Random.Range(decisionTimeMin, decisionTimeMax);
     }
 
-    private void Move()
+    private void MoveTowardsTarget()
     {
-        rb.linearVelocity = movementDirection * moveSpeed;
-    }
+        Vector3 targetPos = new Vector3(currentTargetX, transform.position.y, transform.position.z);
+        Vector3 direction = targetPos - transform.position;
 
-    private void AvoidOtherHamsters()
-    {
-        Collider2D[] nearbyHamsters = Physics2D.OverlapCircleAll(transform.position, avoidanceRadius, LayerMask.GetMask("Hamsters"));
-        
-        foreach (Collider2D hamster in nearbyHamsters)
+        // movimiento
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+
+        // girar hacia donde se mueve
+        if (direction.x > 0.01f) 
         {
-            if (hamster.gameObject != gameObject)
-            {
-                Vector2 avoidanceDirection = (transform.position - hamster.transform.position).normalized;
-                movementDirection = Vector2.Lerp(movementDirection, avoidanceDirection, 0.5f).normalized;
-            }
+            // mirando a la derecha
+            transform.localScale = new Vector3(-0.15f, 0.15f, 1);
+        }
+        else if (direction.x < -0.01f) 
+        {
+            // mirando a la izquierda
+            transform.localScale = new Vector3(0.15f, 0.15f, 1);
+        }
+
+        // cuando llega, elige otro punto
+        if (Mathf.Abs(transform.position.x - currentTargetX) < 0.05f)
+        {
+            PickRandomTarget();
         }
     }
 
-    public void Trap()
+    public void Target()
     {
-        isTrapped = true;
-        rb.linearVelocity = Vector2.zero;
-        rb.isKinematic = true;
-        // Animación de atrapado
+        isTargeted = true;
+    }
+
+    public void Capture(Transform cageTransform)
+    {
+        isTargeted = false;
+        isCaptured = true;
+        cage = cageTransform;
+    }
+
+    public void CageDestroyed()
+    {
+        isCaptured = false;
+        cage = null;
+        PickRandomTarget(); // vuelve a moverse
     }
 
     public void Release()
     {
-        isTrapped = false;
+        isCaptured = false;
+        isTargeted = false;
+        cage = null;
         isEscaping = true;
-        rb.isKinematic = false;
-        
-        // Huir fuera de la pantalla
-        Vector2 escapeDirection = -Vector2.right;
-        //Vector2 escapeDirection = (transform.position - Camera.main.transform.position).normalized;
-        rb.linearVelocity = escapeDirection * moveSpeed * 2f;
-        
         StartCoroutine(DestroyAfterEscape());
     }
 
@@ -89,11 +129,5 @@ public class Hamster : MonoBehaviour
         yield return new WaitForSeconds(5f);
         HamsterGameManager.Instance.HamsterEscaped();
         Destroy(gameObject);
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, avoidanceRadius);
     }
 }
