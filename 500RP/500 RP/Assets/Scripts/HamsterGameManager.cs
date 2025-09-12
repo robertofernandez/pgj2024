@@ -111,7 +111,7 @@ public class HamsterGameManager : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
                 float x = capturePoints[i%pickUpPointsAmount];
-                Vector3 customPosition = new Vector3(x, y, -2.5f); // Reemplaza 5.0f y 3.0f con tus valores conocidos
+                Vector3 customPosition = new Vector3(x, y, hamsterContainer.position.z); // Reemplaza 5.0f y 3.0f con tus valores conocidos
                 GameObject hamsterGO = Instantiate(hamsterPrefab, customPosition, Quaternion.identity, hamsterContainer);
 
                 Hamster hamster = hamsterGO.GetComponent<Hamster>();
@@ -130,6 +130,26 @@ public class HamsterGameManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public Hamster GetNearestHamster(float xPosition)
+    {
+        Hamster nearest = null;
+        float minDistance = Mathf.Infinity;
+
+        foreach (Hamster h in activeHamsters)
+        {
+            if (h == null || h.isTrapped) continue;
+
+            float dist = Mathf.Abs(h.transform.position.x - xPosition);
+            if (dist < minDistance)
+            {
+                minDistance = dist;
+                nearest = h;
+            }
+        }
+
+        return nearest;
     }
 
     public void HamsterCaptured()

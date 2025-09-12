@@ -93,6 +93,10 @@ public class AlienSpaceship : MonoBehaviour
         
         GameObject cageGO = Instantiate(cagePrefab, dropPoint.position, Quaternion.identity);
         Cage cage = cageGO.GetComponent<Cage>();
+        cage.hamsterManager = HamsterGameManager.Instance;
+
+/*
+        Cage cage = cageGO.GetComponent<Cage>();
         
         if (cage != null)
         {
@@ -106,6 +110,7 @@ public class AlienSpaceship : MonoBehaviour
                 cageRb.linearVelocity = Vector2.down * 2f;
             }
         }
+        */
     }
 
     public void OnCageCaptured()

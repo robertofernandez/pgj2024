@@ -40,7 +40,10 @@ public class Hamster : MonoBehaviour
         {
             // sigue la jaula hacia arriba
             if (cage != null)
-                transform.position = cage.position + Vector3.down * 0.5f;
+            {
+                transform.position = new Vector3(cage.position.x, cage.position.y, transform.position.z);
+            }
+//                transform.position = cage.position + Vector3.down * 0.5f;
             return;
         }
 

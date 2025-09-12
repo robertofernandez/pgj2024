@@ -155,13 +155,18 @@ MonoBehaviour:
   moveSpeed: 1.2
   decisionTimeMin: 3
   decisionTimeMax: 6
+  eatingTimeMin: 2
+  eatingTimeMax: 5
   isTargeted: 0
   isCaptured: 0
   isEscaping: 0
   isTrapped: 0
+  isEating: 0
   capturePoints: []
   currentTargetX: 0
   decisionTimer: 0
+  currentCapturePointIndex: -1
+  currentTargetIndex: -1
 --- !u!58 &1937587717943295465
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -169,7 +174,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3845373549316871099}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}

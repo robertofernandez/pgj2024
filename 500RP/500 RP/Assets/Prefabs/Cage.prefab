@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 5963869662115077165}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.3747185, y: -1.5896196, z: 2.4778082}
+  m_LocalPosition: {x: 0, y: 0, z: 2.4778082}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -115,7 +115,7 @@ Transform:
   m_GameObject: {fileID: 8578688082456822981}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.15, y: -2.3, z: -6}
+  m_LocalPosition: {x: 0, y: 0, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -134,10 +134,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2979de4587db29e4395d2a86f9651a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  balloon: {fileID: 0}
-  trappedHamster: {fileID: 0}
+  balloonPrefab: {fileID: 5724478540108157965, guid: 144db2cea42843a49b50d1e0f2904503, type: 3}
   brokenCageEffect: {fileID: 0}
-  fallGravity: 2
+  gravity: -9.8
+  groundLevel: -4.5
+  slowDownDistance: 0.5
+  riseSpeed: 2
+  hamsterManager: {fileID: 0}
 --- !u!50 &1622847128623920085
 Rigidbody2D:
   serializedVersion: 5
@@ -199,6 +202,6 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.3692353, y: -1.6149461}
-  m_Size: {x: 0.56299067, y: 0.8055315}
+  m_Offset: {x: 0.015589714, y: 0.033725023}
+  m_Size: {x: 0.63240814, y: 0.7712436}
   m_Direction: 0

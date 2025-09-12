@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Linq;
 using System.Text;
 
-public class Zone : MonoBehaviour
+public class Zone
 {
     public float[] capturePoints;
 
