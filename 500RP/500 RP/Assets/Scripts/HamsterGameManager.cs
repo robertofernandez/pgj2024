@@ -33,7 +33,7 @@ public class HamsterGameManager : MonoBehaviour
     public List<Transform> hamsterSpawnPoints = new List<Transform>();
 
     private List<Hamster> activeHamsters = new List<Hamster>();
-    private Zone[] zones;
+    public Zone[] zones;
 
     public float[] capturePoints;
 
@@ -115,9 +115,21 @@ public class HamsterGameManager : MonoBehaviour
                 GameObject hamsterGO = Instantiate(hamsterPrefab, customPosition, Quaternion.identity, hamsterContainer);
 
                 Hamster hamster = hamsterGO.GetComponent<Hamster>();
-                hamster.Init(capturePoints);
+                hamster.Init(capturePoints, i);
                 activeHamsters.Add(hamster);
         }
+    }
+
+    public Hamster GetOneActiveHamsterAt(int capturePointIndex)
+    {
+        foreach (Hamster hamster in activeHamsters)
+        {
+            if (!hamster.isCaptured && !hamster.isEscaping)
+            {
+                return hamster;
+            }
+        }
+        return null;
     }
 
     public void HamsterCaptured()

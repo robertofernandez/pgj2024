@@ -11,6 +11,10 @@ public class AlienSpaceship : MonoBehaviour
     [Header("Targeting")]
     public float targetingRange = 10f;
 
+    [Header("Floating")]
+    public float bobbingAmplitude = 0.1f;
+    public float bobbingSpeed = 2f;
+
     private void Start()
     {
         StartCoroutine(DropCagesRoutine());
@@ -107,5 +111,12 @@ public class AlienSpaceship : MonoBehaviour
     public void OnCageCaptured()
     {
         HamsterGameManager.Instance.HamsterCaptured();
+    }
+
+    void Update()
+    {
+        // bobbing senoidal
+        float newY = 0.56f + Mathf.Sin(Time.time * bobbingSpeed) * bobbingAmplitude;
+        transform.localPosition = new Vector3(transform.localPosition.x, newY, transform.localPosition.z);
     }
 }

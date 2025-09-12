@@ -24,9 +24,13 @@ public class Hamster : MonoBehaviour
 
     private Transform cage; // referencia a la jaula si está atrapado
 
-    public void Init(float[] points)
+    public int currentCapturePointIndex = -1;
+    public int currentTargetIndex = -1;
+
+    public void Init(float[] points, int pointIndex)
     {
         capturePoints = points;
+        currentCapturePointIndex = pointIndex;
         PickRandomTarget();
     }
 
@@ -78,8 +82,19 @@ public class Hamster : MonoBehaviour
     {
         if (capturePoints == null || capturePoints.Length == 0) return;
 
-        int index = Random.Range(0, capturePoints.Length);
-        currentTargetX = capturePoints[index];
+        //int index = Random.Range(0, capturePoints.Length);
+        //currentTargetIndex = currentCapturePointIndex + Random.Range(-1, 1);
+        currentTargetIndex = currentCapturePointIndex + (Random.Range(0, 2) == 0 ? -1 : 1);
+        if(currentTargetIndex < 0)
+        {
+            currentTargetIndex = 0;
+        }
+        if(currentTargetIndex >= capturePoints.Length)
+        {
+            currentTargetIndex = capturePoints.Length - 1;
+        }
+
+        currentTargetX = capturePoints[currentTargetIndex];
         decisionTimer = Random.Range(decisionTimeMin, decisionTimeMax);
     }
 
@@ -106,6 +121,7 @@ public class Hamster : MonoBehaviour
         // cuando llega, chance de comer
         if (Mathf.Abs(transform.position.x - currentTargetX) < 0.05f)
         {
+            currentCapturePointIndex = currentTargetIndex;
             // 50% de chance de comer (podés ajustar la probabilidad)
             if (Random.value < 0.5f)
             {
