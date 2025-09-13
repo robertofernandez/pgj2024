@@ -24,7 +24,7 @@ public class BalloonVisual : MonoBehaviour
         // Delegar la colisión al controller principal
         if (balloonController != null)
         {
-            balloonController.HandleCollision(collision);
+            balloonController.TakeDamage(10f);
         }
     }
 }

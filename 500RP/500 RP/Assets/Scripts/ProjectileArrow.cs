@@ -49,6 +49,25 @@ public class ProjectileArrow : MonoBehaviour
 
     private void HandleBalloonHit(Collision2D collision)
     {
+        Balloon balloon = collision.gameObject.GetComponent<Balloon>();
+
+        if(balloon != null)
+        {
+            balloon.TakeDamage(10f);
+        }
+        else
+        {
+            Debug.Log("No balloon in balloon object");
+            balloon = collision.gameObject.GetComponentInParent<Balloon>();
+            if(balloon != null)
+            {
+                balloon.TakeDamage(10f);
+            }
+            else
+            {
+                Debug.Log("still No balloon in balloon object");
+            }
+        }
         // 1. Destruir el globo
         Destroy(collision.gameObject);
 

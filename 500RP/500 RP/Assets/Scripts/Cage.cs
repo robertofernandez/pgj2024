@@ -8,25 +8,31 @@ public class Cage : MonoBehaviour
     [Header("Configuración caída")]
     public float gravity = -9.8f;
     private float groundLevel = -4.3f;
-    public float slowDownDistance = 0.5f; // cuando se acerca al suelo, desacelera
+    public float slowDownDistance = 0.5f;
 
     [Header("Elevación con globo")]
     public float riseSpeed = 2f;
+    public float maxRiseHeight = 3.4f;
 
     private float verticalVelocity = 0f;
     private bool hasLanded = false;
     private bool hasCaptured = false;
 
     private Hamster trappedHamster;
-    private GameObject balloonInstance;
+    private Balloon balloonInstance;
 
     public HamsterGameManager hamsterManager;
 
-    public int laneIndex;        // qué lane ocupa
-    public bool laneFree = false; // true cuando sube o la recoge la nave
+    public int laneIndex;
+    public bool laneFree = false;
+    public bool balloonPopped = false;
 
     void Update()
     {
+        if (balloonPopped)
+        {
+            HandleFallingPopped();
+        }
         if (!hasCaptured)
         {
             if (!hasLanded)
@@ -52,21 +58,35 @@ public class Cage : MonoBehaviour
         {
             if (distanceToGround <= slowDownDistance)
             {
-                // Desacelerar suavemente al acercarse al suelo
                 verticalVelocity = Mathf.Lerp(verticalVelocity, -1f, Time.deltaTime * 5f);
             }
             else
             {
-                // Caída acelerada normal
                 verticalVelocity += gravity * Time.deltaTime;
             }
 
             transform.position += Vector3.up * verticalVelocity * Time.deltaTime;
 
-            // Clampeo por si pasa el suelo
             if (transform.position.y <= groundLevel)
             {
                 LandOnGround();
+            }
+        }
+    }
+
+    private void HandleFallingPopped()
+    {
+        float distanceToGround = transform.position.y - groundLevel;
+
+        if (distanceToGround > 0f)
+        {
+            verticalVelocity += gravity * Time.deltaTime;
+
+            transform.position += Vector3.up * verticalVelocity * Time.deltaTime;
+
+            if (transform.position.y <= groundLevel)
+            {
+                CrashOnGround();
             }
         }
     }
@@ -76,6 +96,14 @@ public class Cage : MonoBehaviour
         hasLanded = true;
         verticalVelocity = 0f;
         transform.position = new Vector3(transform.position.x, groundLevel, transform.position.z);
+    }
+
+    private void CrashOnGround()
+    {
+        hasLanded = true;
+        verticalVelocity = 0f;
+        transform.position = new Vector3(transform.position.x, groundLevel, transform.position.z);
+        ReleaseHamster();
     }
 
     private void TryCaptureHamster()
@@ -95,11 +123,12 @@ public class Cage : MonoBehaviour
                 // Crear globo
                 if (balloonPrefab != null)
                 {
-                    balloonInstance = Instantiate(balloonPrefab, transform);
-                    balloonInstance.transform.localPosition = Vector3.up * 1.1f;
+                    GameObject balloonGO = Instantiate(balloonPrefab, transform);
+                    balloonGO.transform.localPosition = Vector3.up * 1.1f;
+                    balloonInstance = balloonGO.GetComponent<Balloon>();
                 }
 
-                Debug.Log("Hamster atrapado!");
+                //Debug.Log("Hamster atrapado!");
             }
         }
     }
@@ -107,6 +136,7 @@ public class Cage : MonoBehaviour
     public void JoinSpaceship()
     {
         laneFree = true;
+
         if (trappedHamster != null)
         {
             Destroy(trappedHamster.gameObject);
@@ -115,28 +145,28 @@ public class Cage : MonoBehaviour
 
         if (balloonInstance != null)
         {
-            Destroy(balloonInstance);
+            Destroy(balloonInstance.gameObject);
             balloonInstance = null;
         }
 
-        Destroy(gameObject); // destruir la jaula
+        Destroy(gameObject);
     }
 
     private void HandleBalloonRise()
     {
-        if (balloonInstance != null)
+        if (balloonInstance != null && balloonInstance.gameObject.activeSelf)
         {
-            if (transform.position.y >= 3.4f)
+            if (transform.position.y >= maxRiseHeight)
             {
                 laneFree = true;
-                //wait for ship
-                return;
+                return; // espera a la nave
             }
+
             transform.position += Vector3.up * riseSpeed * Time.deltaTime;
         }
         else
         {
-            // Globo destruido → cae y se destruye la jaula
+            // Globo destruido → cae
             verticalVelocity += gravity * Time.deltaTime;
             transform.position += Vector3.up * verticalVelocity * Time.deltaTime;
 
@@ -145,6 +175,12 @@ public class Cage : MonoBehaviour
                 ReleaseHamster();
             }
         }
+    }
+
+    public void OnBalloonDestroyed()
+    {
+        balloonInstance = null; // cage ahora sabe que ya no hay globo
+        balloonPopped = true;
     }
 
     public void ReleaseHamster()
