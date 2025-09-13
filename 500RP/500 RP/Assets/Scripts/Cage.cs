@@ -27,6 +27,8 @@ public class Cage : MonoBehaviour
     public bool laneFree = false;
     public bool balloonPopped = false;
 
+    public bool joined = false;
+
     void Update()
     {
         if (balloonPopped)
@@ -135,6 +137,8 @@ public class Cage : MonoBehaviour
 
     public void JoinSpaceship()
     {
+        joined = true;
+
         laneFree = true;
 
         if (trappedHamster != null)
@@ -197,5 +201,10 @@ public class Cage : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    public bool HasTrappedHamster()
+    {
+        return trappedHamster != null;
     }
 }

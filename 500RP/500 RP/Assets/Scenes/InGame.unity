@@ -1106,7 +1106,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2052717515}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -1207,11 +1207,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 377365964754798655, guid: 885553068d76aac47bed8b5163d5cd55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.45
+      value: 4.67
       objectReference: {fileID: 0}
     - target: {fileID: 377365964754798655, guid: 885553068d76aac47bed8b5163d5cd55, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.56
+      value: 0.74
       objectReference: {fileID: 0}
     - target: {fileID: 377365964754798655, guid: 885553068d76aac47bed8b5163d5cd55, type: 3}
       propertyPath: m_LocalPosition.z

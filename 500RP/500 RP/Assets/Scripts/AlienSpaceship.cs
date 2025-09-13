@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class AlienSpaceship : MonoBehaviour
 {
@@ -14,11 +15,27 @@ public class AlienSpaceship : MonoBehaviour
     private int currentLane = 14;
     private bool movingRight = true;
 
+    private List<Cage> allCages = new List<Cage>();
+
     void Update()
     {
         // Movimiento senoidal en Y
         float newY = 0.56f + Mathf.Sin(Time.time * bobbingSpeed) * bobbingAmplitude;
         transform.localPosition = new Vector3(transform.localPosition.x, newY, transform.localPosition.z);
+
+        foreach(Cage cage in allCages)
+        {
+            if(cage != null)
+            {
+                if(!cage.joined && cage.HasTrappedHamster())
+                {
+                    if (cage.transform.position.y > 0.9 && Mathf.Abs(cage.transform.position.x - transform.position.x) < 1.5)
+                    {
+                        cage.JoinSpaceship();
+                    }
+                }
+            }
+        }
 
         PatrolCapturePoints();
     }
@@ -70,12 +87,13 @@ public class AlienSpaceship : MonoBehaviour
         cage.laneFree = false;
         cage.hamsterManager = HamsterGameManager.Instance;
 
+        allCages.Add(cage);
+
         HamsterGameManager.Instance.OccupyLane(laneIndex, cage);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void FreeCage(Cage cage)
     {
-        Cage cage = other.GetComponent<Cage>();
         if (cage != null)
         {
             cage.JoinSpaceship(); // la cage se autodestruye y libera su lane
