@@ -11,7 +11,7 @@ public class AlienSpaceship : MonoBehaviour
     public float bobbingAmplitude = 0.1f;
     public float bobbingSpeed = 2f;
 
-    private int currentLane = 0;
+    private int currentLane = 14;
     private bool movingRight = true;
 
     void Update()
@@ -29,7 +29,7 @@ public class AlienSpaceship : MonoBehaviour
         if (capturePoints == null || capturePoints.Length == 0) return;
 
         float speed = 1f + HamsterGameManager.Instance.currentLevel * 0.5f; // velocidad según nivel
-        float targetX = capturePoints[currentLane];
+        float targetX = capturePoints[currentLane] + 2.5f;
         Vector3 targetPos = new Vector3(targetX, transform.localPosition.y, transform.localPosition.z);
 
         transform.localPosition = Vector3.MoveTowards(transform.localPosition, targetPos, speed * Time.deltaTime);
