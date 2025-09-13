@@ -22,6 +22,9 @@ public class Cage : MonoBehaviour
 
     public HamsterGameManager hamsterManager;
 
+    public int laneIndex;        // qué lane ocupa
+    public bool laneFree = false; // true cuando sube o la recoge la nave
+
     void Update()
     {
         if (!hasCaptured)
@@ -101,27 +104,35 @@ public class Cage : MonoBehaviour
         }
     }
 
+    public void JoinSpaceship()
+    {
+        laneFree = true;
+        if (trappedHamster != null)
+        {
+            Destroy(trappedHamster.gameObject);
+            trappedHamster = null;
+        }
+
+        if (balloonInstance != null)
+        {
+            Destroy(balloonInstance);
+            balloonInstance = null;
+        }
+
+        Destroy(gameObject); // destruir la jaula
+    }
+
     private void HandleBalloonRise()
     {
         if (balloonInstance != null)
         {
-            transform.position += Vector3.up * riseSpeed * Time.deltaTime;
-            if (transform.position.y >= 0.56f)
+            if (transform.position.y >= 3.4f)
             {
-                if (trappedHamster != null)
-                {
-                    Destroy(trappedHamster.gameObject);
-                    trappedHamster = null;
-                }
-
-                if (balloonInstance != null)
-                {
-                    Destroy(balloonInstance);
-                    balloonInstance = null;
-                }
-
-                Destroy(gameObject); // destruir la jaula
+                laneFree = true;
+                //wait for ship
+                return;
             }
+            transform.position += Vector3.up * riseSpeed * Time.deltaTime;
         }
         else
         {

@@ -37,6 +37,26 @@ public class HamsterGameManager : MonoBehaviour
 
     public float[] capturePoints;
 
+    private Dictionary<int, Cage> occupiedLanes = new Dictionary<int, Cage>();
+
+    public bool IsLaneFree(int laneIndex)
+    {
+        return !occupiedLanes.ContainsKey(laneIndex) || occupiedLanes[laneIndex] == null;
+    }
+
+    public void OccupyLane(int laneIndex, Cage cage)
+    {
+        occupiedLanes[laneIndex] = cage;
+    }
+
+    public void FreeLane(int laneIndex)
+    {
+        if (occupiedLanes.ContainsKey(laneIndex))
+        {
+            occupiedLanes[laneIndex] = null;
+        }
+    }
+
     void Awake()
     {
         if (Instance == null)
